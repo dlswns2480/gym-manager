@@ -21,6 +21,7 @@ public class MemberService {
 
     @Transactional
     public MemberResponse createMember(MemberRequest request){
+        validateDuplicate(request); // 중복검증
         Member member = Member.createMember(request);
         Member result = memberRepository.save(member);
         return new MemberResponse(result.getName(), result.getMembership());
