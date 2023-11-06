@@ -30,6 +30,8 @@ public class Member extends BaseEntity {
     private List<Review> reviewList;
     @OneToMany(mappedBy = "member")
     private List<Order> orders = new ArrayList<>();
+    @OneToMany(mappedBy = "member")
+    private List<Review> reviews = new ArrayList<>();
 
     private Member(String name, String phoneNumber, Membership membership) {
         this.name = name;
