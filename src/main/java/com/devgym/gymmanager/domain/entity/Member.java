@@ -4,15 +4,17 @@ import com.devgym.gymmanager.domain.BaseEntity;
 import com.devgym.gymmanager.domain.type.Membership;
 import com.devgym.gymmanager.dto.MemberRequest;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.engine.internal.Cascade;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 public class Member extends BaseEntity {
     @Id
@@ -22,15 +24,14 @@ public class Member extends BaseEntity {
     private String name;
     private String phoneNumber;
     private Membership membership;
-    private Boolean useLocker;
     @ManyToOne
     @JoinColumn(name = "trainer_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private Trainer trainer;
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
     private List<Review> reviewList;
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
     private List<Order> orders = new ArrayList<>();
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
     private List<Review> reviews = new ArrayList<>();
 
     private Member(String name, String phoneNumber, Membership membership) {
@@ -48,8 +49,12 @@ public class Member extends BaseEntity {
         }
         return new Member(name, phoneNumber, membership);
     }
-    public void changeLocker(){
-        this.useLocker = !this.useLocker;
+
+    public void setTrainer(Trainer trainer){
+        if (this.trainer != null) {
+            throw new IllegalArgumentException("이미 지정 트레이너가 있습니다");
+        }
+        this.trainer = trainer;
     }
 
 }

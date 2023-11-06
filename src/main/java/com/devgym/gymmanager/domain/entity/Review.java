@@ -3,12 +3,13 @@ package com.devgym.gymmanager.domain.entity;
 import com.devgym.gymmanager.domain.BaseEntity;
 import com.devgym.gymmanager.dto.ReviewRequest;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 public class Review extends BaseEntity {
     @Id
@@ -20,7 +21,7 @@ public class Review extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "member_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private Member member;
-    @Builder
+    @Builder(access = AccessLevel.PRIVATE)
     private Review(ReviewRequest reviewRequest){
         this.member = reviewRequest.member();
         this.score = reviewRequest.score();

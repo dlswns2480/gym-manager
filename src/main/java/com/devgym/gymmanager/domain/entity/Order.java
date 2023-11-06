@@ -4,6 +4,7 @@ import com.devgym.gymmanager.domain.BaseEntity;
 import com.devgym.gymmanager.domain.type.Category;
 import com.devgym.gymmanager.domain.type.OrderStatus;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 
@@ -11,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "orders")
 public class Order extends BaseEntity {
     @Id

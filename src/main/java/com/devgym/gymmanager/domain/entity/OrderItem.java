@@ -4,11 +4,12 @@ import com.devgym.gymmanager.domain.BaseEntity;
 import com.devgym.gymmanager.domain.type.Category;
 import com.devgym.gymmanager.dto.CreateOrderItem;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 @Entity
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class OrderItem extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
