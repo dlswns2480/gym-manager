@@ -1,4 +1,4 @@
-package com.devgym.gymmanager.domain;
+package com.devgym.gymmanager.domain.type;
 
 public enum Membership {
     ONE_MONTH,
