@@ -1,7 +1,7 @@
 package com.devgym.gymmanager.domain.entity;
 
 import com.devgym.gymmanager.domain.BaseEntity;
-import com.devgym.gymmanager.dto.ReviewRequest;
+import com.devgym.gymmanager.dto.request.ReviewRequest;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -23,7 +23,6 @@ public class Review extends BaseEntity {
     private Member member;
     @Builder(access = AccessLevel.PRIVATE)
     private Review(ReviewRequest reviewRequest){
-        this.member = reviewRequest.member();
         this.score = reviewRequest.score();
         this.content = reviewRequest.content();
     }
@@ -34,5 +33,8 @@ public class Review extends BaseEntity {
             throw new IllegalStateException("100점 미만의 점수만 입력 가능합니다");
         }
         return Review.builder().reviewRequest(reviewRequest).build();
+    }
+    public void setMember(Member member){
+        this.member = member;
     }
 }

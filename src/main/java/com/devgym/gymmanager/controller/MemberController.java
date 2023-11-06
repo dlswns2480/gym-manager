@@ -1,7 +1,7 @@
 package com.devgym.gymmanager.controller;
 
-import com.devgym.gymmanager.dto.MemberRequest;
-import com.devgym.gymmanager.dto.MemberResponse;
+import com.devgym.gymmanager.dto.request.MemberRequest;
+import com.devgym.gymmanager.dto.response.MemberResponse;
 import com.devgym.gymmanager.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

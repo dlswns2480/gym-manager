@@ -1,4 +1,4 @@
-package com.devgym.gymmanager.dto;
+package com.devgym.gymmanager.dto.request;
 
 import com.devgym.gymmanager.domain.type.Category;
 

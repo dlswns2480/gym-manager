@@ -2,13 +2,11 @@ package com.devgym.gymmanager.domain.entity;
 
 import com.devgym.gymmanager.domain.BaseEntity;
 import com.devgym.gymmanager.domain.type.Membership;
-import com.devgym.gymmanager.dto.MemberRequest;
+import com.devgym.gymmanager.dto.request.MemberRequest;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.engine.internal.Cascade;
 
 import java.util.ArrayList;
 import java.util.List;

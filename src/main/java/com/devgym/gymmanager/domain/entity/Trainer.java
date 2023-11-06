@@ -1,7 +1,7 @@
 package com.devgym.gymmanager.domain.entity;
 
 import com.devgym.gymmanager.domain.BaseEntity;
-import com.devgym.gymmanager.dto.TrainerRequest;
+import com.devgym.gymmanager.dto.request.TrainerRequest;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;

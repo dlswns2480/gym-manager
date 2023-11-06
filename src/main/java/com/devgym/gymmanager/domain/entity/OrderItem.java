@@ -2,7 +2,7 @@ package com.devgym.gymmanager.domain.entity;
 
 import com.devgym.gymmanager.domain.BaseEntity;
 import com.devgym.gymmanager.domain.type.Category;
-import com.devgym.gymmanager.dto.CreateOrderItem;
+import com.devgym.gymmanager.dto.request.CreateOrderItem;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;

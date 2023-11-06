@@ -2,8 +2,8 @@ package com.devgym.gymmanager.service;
 
 import com.devgym.gymmanager.domain.entity.Member;
 import com.devgym.gymmanager.domain.type.Membership;
-import com.devgym.gymmanager.dto.MemberRequest;
-import com.devgym.gymmanager.dto.MemberResponse;
+import com.devgym.gymmanager.dto.request.MemberRequest;
+import com.devgym.gymmanager.dto.response.MemberResponse;
 import com.devgym.gymmanager.exception.NotFoundInfoException;
 import com.devgym.gymmanager.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -45,6 +45,10 @@ public class MemberService {
         if(member.isPresent()){
             throw new IllegalStateException("이미 존재하는 회원입니다");
         }
+    }
+
+    protected Member findByIdService(Long memberId) {
+        return memberRepository.findById(memberId).orElseThrow(NotFoundInfoException::new);
     }
 
 

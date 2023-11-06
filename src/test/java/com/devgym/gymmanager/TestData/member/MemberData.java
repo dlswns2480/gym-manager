@@ -2,8 +2,7 @@ package com.devgym.gymmanager.TestData.member;
 
 import com.devgym.gymmanager.domain.entity.Member;
 import com.devgym.gymmanager.domain.type.Membership;
-import com.devgym.gymmanager.dto.MemberRequest;
-import com.devgym.gymmanager.service.MemberService;
+import com.devgym.gymmanager.dto.request.MemberRequest;
 
 public class MemberData {
     public static MemberRequest getMemberRequest(){

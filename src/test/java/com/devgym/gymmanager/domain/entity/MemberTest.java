@@ -1,7 +1,7 @@
 package com.devgym.gymmanager.domain.entity;
 
 import com.devgym.gymmanager.domain.type.Membership;
-import com.devgym.gymmanager.dto.MemberRequest;
+import com.devgym.gymmanager.dto.request.MemberRequest;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
