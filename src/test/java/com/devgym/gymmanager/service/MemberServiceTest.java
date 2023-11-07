@@ -2,7 +2,10 @@ package com.devgym.gymmanager.service;
 
 import com.devgym.gymmanager.TestData.member.MemberData;
 import com.devgym.gymmanager.domain.entity.Member;
+import com.devgym.gymmanager.domain.entity.Trainer;
 import com.devgym.gymmanager.domain.type.Membership;
+import com.devgym.gymmanager.dto.request.AddTrainer;
+import com.devgym.gymmanager.dto.request.TrainerRequest;
 import com.devgym.gymmanager.dto.response.MemberResponse;
 import com.devgym.gymmanager.exception.NotFoundInfoException;
 import com.devgym.gymmanager.repository.MemberRepository;
@@ -26,6 +29,8 @@ import static org.mockito.Mockito.when;
 class MemberServiceTest {
     @Mock
     MemberRepository memberRepository;
+    @Mock
+    TrainerService trainerService;
     @InjectMocks
     MemberService service;
 
@@ -52,9 +57,10 @@ class MemberServiceTest {
                 () -> assertThat(result.membership()).isEqualTo(member.getMembership())
         );
     }
+
     @Test
     @DisplayName("해당 멤버쉽을 가진 고객이 없으면 예외가 발생한다")
-    void findByMemberShipNotExist(){
+    void findByMemberShipNotExist() {
         when(memberRepository.findByMembership(any(Membership.class))).thenReturn(Optional.empty());
 
         assertThrows(NotFoundInfoException.class, () -> service.findByMembership(Membership.HALF_YEAR));
@@ -62,7 +68,7 @@ class MemberServiceTest {
 
     @Test
     @DisplayName("모든 회원 정보를 조회할 수 있다")
-    void findAll(){
+    void findAll() {
         List<Member> members = new ArrayList<>();
         members.add(MemberData.getMember());
         when(memberRepository.findAll()).thenReturn(members);
@@ -74,4 +80,20 @@ class MemberServiceTest {
                 () -> assertThat(allMembers.get(0).membership()).isEqualTo(members.get(0).getMembership())
         );
     }
+
+//    @Test
+//    @DisplayName("회원에게 트레이너를 지정해줄 수 있다")
+//    void registerTrainer(){
+//        TrainerRequest teacher = new TrainerRequest("teacher", "01034622480", 4,20000);
+//        Trainer trainer = Trainer.createTrainer(teacher);
+//        Member member = MemberData.getMember();
+//
+//        when(memberRepository.findById(any(Long.class))).thenReturn(Optional.of(member));
+//        when(trainerService.findByIdService(any(Long.class))).thenReturn(trainer);
+//
+//        AddTrainer addTrainer = new AddTrainer(member.getId(), trainer.getId());
+//        Long resultId = service.registerTrainer(addTrainer);
+//
+//        assertThat(trainer.getMemberList()).contains(member);
+//    }
 }

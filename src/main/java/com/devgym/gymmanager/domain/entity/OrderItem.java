@@ -28,4 +28,12 @@ public class OrderItem extends BaseEntity {
         this.price = orderItem.price();
         this.quantity = orderItem.quantity();
     }
+
+    public static OrderItem createItem(CreateOrderItem request) {
+        int price = request.price();
+        if(price <= 0){
+            throw new IllegalArgumentException("가격이 0원 이하일 수 없습니다");
+        }
+        return OrderItem.builder().orderItem(request).build();
+    }
 }
