@@ -47,7 +47,8 @@ class ReviewServiceTest {
 
         assertAll(
                 () -> assertThat(review.score()).isEqualTo(reviewRequest.score()),
-                () -> assertThat(review.content()).isEqualTo(reviewRequest.content())
+                () -> assertThat(review.content()).isEqualTo(reviewRequest.content()),
+                () -> assertThat(review.memberName()).isEqualTo(member.getName())
         );
     }
 
