@@ -6,10 +6,12 @@ import com.devgym.gymmanager.dto.request.CreateOrderItem;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Getter
 public class OrderItem extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,11 +20,12 @@ public class OrderItem extends BaseEntity {
     private Category category;
     private int price;
     private int quantity;
+
     @ManyToOne
     @JoinColumn(name = "order_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private Order order;
-    @Builder
-    public OrderItem(CreateOrderItem orderItem){
+    @Builder(access = AccessLevel.PRIVATE)
+    private OrderItem(CreateOrderItem orderItem){
         this.name = orderItem.name();
         this.category = orderItem.category();
         this.price = orderItem.price();
@@ -35,5 +38,9 @@ public class OrderItem extends BaseEntity {
             throw new IllegalArgumentException("가격이 0원 이하일 수 없습니다");
         }
         return OrderItem.builder().orderItem(request).build();
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
     }
 }

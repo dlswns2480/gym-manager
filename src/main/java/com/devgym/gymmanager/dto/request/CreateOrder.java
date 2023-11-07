@@ -1,4 +1,6 @@
 package com.devgym.gymmanager.dto.request;
 
-public record CreateOrder() {
+import com.devgym.gymmanager.domain.entity.OrderItem;
+
+public record CreateOrder(Long memberId, OrderItem... orderItems) {
 }
