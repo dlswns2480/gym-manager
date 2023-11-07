@@ -15,6 +15,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,19 +82,21 @@ class MemberServiceTest {
         );
     }
 
-//    @Test
-//    @DisplayName("회원에게 트레이너를 지정해줄 수 있다")
-//    void registerTrainer(){
-//        TrainerRequest teacher = new TrainerRequest("teacher", "01034622480", 4,20000);
-//        Trainer trainer = Trainer.createTrainer(teacher);
-//        Member member = MemberData.getMember();
-//
-//        when(memberRepository.findById(any(Long.class))).thenReturn(Optional.of(member));
-//        when(trainerService.findByIdService(any(Long.class))).thenReturn(trainer);
-//
-//        AddTrainer addTrainer = new AddTrainer(member.getId(), trainer.getId());
-//        Long resultId = service.registerTrainer(addTrainer);
-//
-//        assertThat(trainer.getMemberList()).contains(member);
-//    }
+    @Test
+    @DisplayName("회원에게 트레이너를 지정해줄 수 있다")
+    void registerTrainer(){
+        TrainerRequest teacher = new TrainerRequest("teacher", "01034622480", 4,20000);
+        Trainer trainer = Trainer.createTrainer(teacher);
+        Member member = MemberData.getMember();
+        ReflectionTestUtils.setField(trainer, "id", 1L);
+        ReflectionTestUtils.setField(member, "id", 1L);
+
+        when(memberRepository.findById(any(Long.class))).thenReturn(Optional.of(member));
+        when(trainerService.findByIdService(any(Long.class))).thenReturn(trainer);
+
+        AddTrainer addTrainer = new AddTrainer(member.getId(), trainer.getId());
+        Long resultId = service.registerTrainer(addTrainer);
+
+        assertThat(trainer.getMemberList()).contains(member);
+    }
 }

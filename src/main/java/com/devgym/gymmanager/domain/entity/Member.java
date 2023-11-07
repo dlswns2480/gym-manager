@@ -26,7 +26,7 @@ public class Member extends BaseEntity {
     @JoinColumn(name = "trainer_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private Trainer trainer;
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
-    private List<Review> reviewList;
+    private List<Review> reviewList = new ArrayList<>();
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
     private List<Order> orders = new ArrayList<>();
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
