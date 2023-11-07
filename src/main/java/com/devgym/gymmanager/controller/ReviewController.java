@@ -25,8 +25,8 @@ public class ReviewController {
         return new ResponseEntity<>(reviewService.findAll(), HttpStatus.OK);
     }
 
-    @GetMapping
-    public ResponseEntity<List<ReviewResponse>> findReviewGreaterThan(@RequestParam int score) {
+    @GetMapping("/{score}")
+    public ResponseEntity<List<ReviewResponse>> findReviewGreaterThan(@PathVariable int score) {
         return new ResponseEntity<>(reviewService.findByScore(score), HttpStatus.OK);
     }
 }

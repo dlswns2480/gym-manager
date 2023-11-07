@@ -1,6 +1,7 @@
-package com.devgym.gymmanager.dto.response;
+package com.devgym.gymmanager.dto.mapper;
 
 import com.devgym.gymmanager.domain.entity.OrderItem;
+import com.devgym.gymmanager.dto.response.OrderItemResponse;
 
 public class OrderItemMapper {
     public static OrderItemResponse toOrderItemResponse(OrderItem orderItem){

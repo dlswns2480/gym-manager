@@ -46,4 +46,8 @@ public class Order extends BaseEntity {
         }
         return Order.builder().request(request).build();
     }
+    public void setMember(Member member){
+        this.member = member;
+        member.getOrders().add(this);
+    }
 }

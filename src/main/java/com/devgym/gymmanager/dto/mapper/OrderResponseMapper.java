@@ -1,7 +1,9 @@
-package com.devgym.gymmanager.dto.response;
+package com.devgym.gymmanager.dto.mapper;
 
 import com.devgym.gymmanager.domain.entity.Order;
 import com.devgym.gymmanager.domain.entity.OrderItem;
+import com.devgym.gymmanager.dto.response.OrderItemResponse;
+import com.devgym.gymmanager.dto.response.OrderResponse;
 
 import java.util.List;
 
