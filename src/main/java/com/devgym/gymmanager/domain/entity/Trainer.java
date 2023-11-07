@@ -5,12 +5,14 @@ import com.devgym.gymmanager.dto.request.TrainerRequest;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Getter
 public class Trainer extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,7 +32,7 @@ public class Trainer extends BaseEntity {
         this.career = trainerRequest.career();
         this.hourlyPrice = trainerRequest.hourlyPrice();
     }
-    public Trainer createTrainer(TrainerRequest trainerRequest){
+    public static Trainer createTrainer(TrainerRequest trainerRequest){
         String phoneNumber = trainerRequest.phoneNumber();
         if(!phoneNumber.startsWith("010")){
             throw new IllegalStateException("올바르지 않은 전화번호 형식입니다");
