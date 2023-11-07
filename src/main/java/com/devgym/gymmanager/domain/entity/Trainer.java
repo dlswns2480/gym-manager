@@ -39,11 +39,4 @@ public class Trainer extends BaseEntity {
         }
         return Trainer.builder().trainerRequest(trainerRequest).build();
     }
-
-    public void addMember(Member member){
-        if(this.memberList.contains(member)){
-            throw new IllegalArgumentException("이미 교육중인 회원 중 하나입니다.");
-        }
-        memberList.add(member);
-    }
 }

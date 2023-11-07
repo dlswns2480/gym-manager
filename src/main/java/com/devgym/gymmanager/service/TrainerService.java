@@ -3,6 +3,7 @@ package com.devgym.gymmanager.service;
 import com.devgym.gymmanager.domain.entity.Trainer;
 import com.devgym.gymmanager.dto.request.TrainerRequest;
 import com.devgym.gymmanager.dto.response.TrainerResponse;
+import com.devgym.gymmanager.exception.NotFoundInfoException;
 import com.devgym.gymmanager.repository.TrainerRepository;
 import com.sun.jdi.request.DuplicateRequestException;
 import lombok.RequiredArgsConstructor;
@@ -41,4 +42,9 @@ public class TrainerService {
                 .map(t -> new TrainerResponse(t.getName(), t.getPhoneNumber(), t.getCareer(), t.getHourlyPrice()))
                 .toList();
     }
+
+    protected Trainer findByIdService(Long trainerId) {
+        return trainerRepository.findById(trainerId).orElseThrow(NotFoundInfoException::new);
+    }
+
 }

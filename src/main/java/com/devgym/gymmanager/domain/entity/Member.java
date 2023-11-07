@@ -50,9 +50,10 @@ public class Member extends BaseEntity {
 
     public void setTrainer(Trainer trainer){
         if (this.trainer != null) {
-            throw new IllegalArgumentException("이미 지정 트레이너가 있습니다");
+            this.trainer.getMemberList().remove(this);
         }
         this.trainer = trainer;
+        trainer.getMemberList().add(this);
     }
 
 }
