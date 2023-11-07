@@ -43,7 +43,7 @@ public class ReviewService {
     /*
     * 별점으로 조회*/
     public List<ReviewResponse> findByScore(int score){
-        List<Review> all = reviewRepository.findAllByScore(score);
+        List<Review> all = reviewRepository.findByScore(score);
         return all.stream()
                 .map(review ->
                         new ReviewResponse(memberService.findByIdService(review.getMember().getId()).getName(),
