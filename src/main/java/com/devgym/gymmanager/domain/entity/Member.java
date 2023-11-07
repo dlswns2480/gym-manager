@@ -22,7 +22,7 @@ public class Member extends BaseEntity {
     private String name;
     private String phoneNumber;
     private Membership membership;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "trainer_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private Trainer trainer;
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)

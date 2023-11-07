@@ -21,7 +21,7 @@ public class OrderItem extends BaseEntity {
     private int price;
     private int quantity;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private Order order;
     @Builder(access = AccessLevel.PRIVATE)

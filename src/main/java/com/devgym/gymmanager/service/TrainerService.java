@@ -18,7 +18,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class TrainerService {
     private final TrainerRepository trainerRepository;
-    private final MemberService memberService;
 
     private void validateDuplicateTrainer(String phoneNumber) {
         Optional<Trainer> trainer = trainerRepository.findByPhoneNumber(phoneNumber);

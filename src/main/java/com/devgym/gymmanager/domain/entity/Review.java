@@ -18,7 +18,7 @@ public class Review extends BaseEntity {
     private Long id;
     private int score;
     private String content;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private Member member;
     @Builder(access = AccessLevel.PRIVATE)
