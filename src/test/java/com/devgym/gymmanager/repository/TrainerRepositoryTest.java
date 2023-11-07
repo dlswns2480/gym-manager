@@ -1,7 +1,42 @@
 package com.devgym.gymmanager.repository;
 
-import static org.junit.jupiter.api.Assertions.*;
+import com.devgym.gymmanager.domain.entity.Trainer;
+import com.devgym.gymmanager.dto.request.TrainerRequest;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.*;
+
+@SpringBootTest
 class TrainerRepositoryTest {
+    private final TrainerRepository trainerRepository;
 
+    @Autowired
+    TrainerRepositoryTest(TrainerRepository trainerRepository) {
+        this.trainerRepository = trainerRepository;
+    }
+
+    @Test
+    @DisplayName("특정 경력 이상의 트레이너들을 조회할 수 있다")
+    void findByCareer(){
+        TrainerRequest trainer1 = new TrainerRequest("jun", "01034444444", 5, 10000);
+        TrainerRequest trainer2 = new TrainerRequest("in", "01034444444", 3, 15000);
+
+        trainerRepository.save(Trainer.createTrainer(trainer1));
+        trainerRepository.save(Trainer.createTrainer(trainer2));
+
+        List<Trainer> all = trainerRepository.findAllByCareerGreaterThanEqual(4);
+
+        Assertions.assertAll(
+                () -> assertThat(all.size()).isEqualTo(1),
+                () -> assertThat(all.get(0).getName()).isEqualTo("jun"),
+                () -> assertThat(all.get(0).getHourlyPrice()).isEqualTo(10000)
+        );
+
+    }
 }
