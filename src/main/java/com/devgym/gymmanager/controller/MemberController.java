@@ -4,6 +4,7 @@ import com.devgym.gymmanager.domain.type.Membership;
 import com.devgym.gymmanager.dto.request.AddTrainer;
 import com.devgym.gymmanager.dto.request.MemberRequest;
 import com.devgym.gymmanager.dto.response.MemberResponse;
+import com.devgym.gymmanager.dto.response.TrainerResponse;
 import com.devgym.gymmanager.service.MemberService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -31,7 +32,7 @@ public class MemberController {
         return new ResponseEntity<>(service.findAllMembers(), HttpStatus.OK);
     }
     @PostMapping("/register-pt")
-    public ResponseEntity<Long> registerTrainer(@RequestBody AddTrainer request) {
+    public ResponseEntity<TrainerResponse> registerTrainer(@RequestBody AddTrainer request) {
         return new ResponseEntity<>(service.registerTrainer(request), HttpStatus.OK);
     }
 }

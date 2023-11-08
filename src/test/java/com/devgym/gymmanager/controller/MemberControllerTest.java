@@ -26,7 +26,6 @@ class MemberControllerTest extends BaseIntegrationTest {
                 .andExpect(jsonPath("$.name").value(memberRequest.name()))
                 .andExpect(jsonPath("$.membership").value(memberRequest.membership().toString()));
     }
-
     @Test
     @DisplayName("회원을 멤버십을 통해 조회할 수 있다")
     void findByMembership() throws Exception {
@@ -40,7 +39,6 @@ class MemberControllerTest extends BaseIntegrationTest {
                 .andExpect(jsonPath("$[0].name").value("hyunjung"))
                 .andExpect(jsonPath("$[0].membership").value(Membership.HALF_YEAR.toString()));
     }
-
     @Test
     @DisplayName("회원을 전체 조회할 수 있다")
     void findAll() throws Exception {

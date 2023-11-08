@@ -6,6 +6,7 @@ import com.devgym.gymmanager.domain.type.Membership;
 import com.devgym.gymmanager.dto.request.AddTrainer;
 import com.devgym.gymmanager.dto.request.MemberRequest;
 import com.devgym.gymmanager.dto.response.MemberResponse;
+import com.devgym.gymmanager.dto.response.TrainerResponse;
 import com.devgym.gymmanager.exception.NotFoundInfoException;
 import com.devgym.gymmanager.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -30,11 +31,11 @@ public class MemberService {
         return new MemberResponse(result.getName(), result.getMembership());
     }
     @Transactional
-    public Long registerTrainer(AddTrainer request) {
+    public TrainerResponse registerTrainer(AddTrainer request) {
         Trainer trainer = trainerService.findByIdService(request.trainerId());
         Member member = memberRepository.findById(request.memberId()).orElseThrow(NotFoundInfoException::new);
         member.setTrainer(trainer);
-        return trainer.getId();
+        return new TrainerResponse(trainer.getName(), trainer.getPhoneNumber(), trainer.getCareer(), trainer.getHourlyPrice());
     }
     public MemberResponse findById(Long memberId) {
         Member member = memberRepository.findById(memberId).orElseThrow(NotFoundInfoException::new);
