@@ -26,10 +26,10 @@ public class ItemController {
     @Operation(summary = "주문 상품 생성 요청", description = "주문 상품 정보가 생성됩니다.", tags = { "ItemController" })
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "주문 상품 정보 생성 성공",
-                    content = @Content(schema = @Schema(implementation = Long.class))),
-            @ApiResponse(responseCode = "404", description = "존재하지 않는 리소스 접근",
-                    content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = Long.class))),
 
+            @ApiResponse(responseCode = "404", description = "존재하지 않는 리소스 접근",
+                    content = @Content(mediaType = "application/json",schema = @Schema(implementation = ErrorResponse.class))),
     })
     @PostMapping("/create")
     public ResponseEntity<Long> createItem(@RequestBody CreateOrderItem request){
@@ -38,10 +38,9 @@ public class ItemController {
     @Operation(summary = "주문 상품 조회 요청", description = "주문 상품 정보를 전체 조회합니다.", tags = { "ItemController" })
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "주문 상품 정보 조회 성공",
-                    content = @Content(schema = @Schema(implementation = OrderItemResponse.class))),
+                    content = @Content(mediaType = "application/json",schema = @Schema(implementation = OrderItemResponse.class))),
             @ApiResponse(responseCode = "404", description = "존재하지 않는 리소스 접근",
-                    content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
-
+                    content = @Content(mediaType = "application/json",schema = @Schema(implementation = ErrorResponse.class))),
     })
     @GetMapping
     public ResponseEntity<List<OrderItemResponse>> findAll() {

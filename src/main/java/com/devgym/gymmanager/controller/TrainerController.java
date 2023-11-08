@@ -26,9 +26,9 @@ public class TrainerController {
     @Operation(summary = "트레이너 생성 요청", description = "트레이너 정보가 생성됩니다.", tags = { "TrainerController" })
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "트레이너 정보 생성 성공",
-                    content = @Content(schema = @Schema(implementation = TrainerResponse.class))),
+                    content = @Content(mediaType = "application/json",schema = @Schema(implementation = TrainerResponse.class))),
             @ApiResponse(responseCode = "404", description = "존재하지 않는 리소스 접근",
-                    content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+                    content = @Content(mediaType = "application/json",schema = @Schema(implementation = ErrorResponse.class))),
 
     })
     @PostMapping("/create")
@@ -38,9 +38,9 @@ public class TrainerController {
     @Operation(summary = "트레이너 조회 요청", description = "특정 경력 이상의 트레이너들을 조회합니다.", tags = { "TrainerController" })
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "트레이너 정보 조회 성공",
-                    content = @Content(schema = @Schema(implementation = TrainerResponse.class))),
+                    content = @Content(mediaType = "application/json",schema = @Schema(implementation = TrainerResponse.class))),
             @ApiResponse(responseCode = "404", description = "존재하지 않는 리소스 접근",
-                    content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+                    content = @Content(mediaType = "application/json",schema = @Schema(implementation = ErrorResponse.class))),
 
     })
     @GetMapping("/{career}")

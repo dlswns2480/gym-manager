@@ -28,9 +28,9 @@ public class MemberController {
     @Operation(summary = "회원 생성 요청", description = "회원 정보가 생성됩니다.", tags = { "MemberController" })
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "회원 정보 생성 성공",
-                    content = @Content(schema = @Schema(implementation = MemberResponse.class))),
+                    content = @Content(mediaType = "application/json",schema = @Schema(implementation = MemberResponse.class))),
             @ApiResponse(responseCode = "404", description = "존재하지 않는 리소스 접근",
-                    content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+                    content = @Content(mediaType = "application/json",schema = @Schema(implementation = ErrorResponse.class))),
 
     })
     @PostMapping("/create")
@@ -40,9 +40,9 @@ public class MemberController {
     @Operation(summary = "회원 조회 요청", description = "멤버십을 통해 회원 정보를 조회합니다.", tags = { "MemberController" })
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "회원 조회 성공",
-                    content = @Content(schema = @Schema(implementation = MemberResponse.class))),
+                    content = @Content(mediaType = "application/json",schema = @Schema(implementation = MemberResponse.class))),
             @ApiResponse(responseCode = "404", description = "존재하지 않는 리소스 접근",
-                    content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+                    content = @Content(mediaType = "application/json",schema = @Schema(implementation = ErrorResponse.class))),
 
     })
     @GetMapping("/membership")
@@ -52,9 +52,9 @@ public class MemberController {
     @Operation(summary = "회원 조회 요청", description = "전체 회원정보를 조회합니다.", tags = { "MemberController" })
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "회원 조회 성공",
-                    content = @Content(schema = @Schema(implementation = MemberResponse.class))),
+                    content = @Content(mediaType = "application/json",schema = @Schema(implementation = MemberResponse.class))),
             @ApiResponse(responseCode = "404", description = "존재하지 않는 리소스 접근",
-                    content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+                    content = @Content(mediaType = "application/json",schema = @Schema(implementation = ErrorResponse.class))),
 
     })
     @GetMapping
@@ -64,9 +64,9 @@ public class MemberController {
     @Operation(summary = "트레이너 등록 요청", description = "회원에게 트레이너가 지정됩니다.", tags = { "MemberController" })
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "트레이너 등록 성공",
-                    content = @Content(schema = @Schema(implementation = TrainerResponse.class))),
+                    content = @Content(mediaType = "application/json",schema = @Schema(implementation = TrainerResponse.class))),
             @ApiResponse(responseCode = "404", description = "존재하지 않는 리소스 접근",
-                    content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+                    content = @Content(mediaType = "application/json",schema = @Schema(implementation = ErrorResponse.class))),
 
     })
     @PostMapping("/register-pt")

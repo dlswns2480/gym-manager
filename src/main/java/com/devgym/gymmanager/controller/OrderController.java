@@ -26,9 +26,9 @@ public class OrderController {
     @Operation(summary = "주문 생성 요청", description = "주문 정보가 생성됩니다.", tags = { "OrderController" })
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "주문 정보 생성 성공",
-                    content = @Content(schema = @Schema(implementation = OrderResponse.class))),
+                    content = @Content(mediaType = "application/json",schema = @Schema(implementation = OrderResponse.class))),
             @ApiResponse(responseCode = "404", description = "존재하지 않는 리소스 접근",
-                    content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+                    content = @Content(mediaType = "application/json",schema = @Schema(implementation = ErrorResponse.class))),
 
     })
     @PostMapping("/create")
@@ -38,9 +38,9 @@ public class OrderController {
     @Operation(summary = "주문 조회 요청", description = "전체 주문 정보를 조회합니다.", tags = { "OrderController" })
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "주문 정보 조회 성공",
-                    content = @Content(schema = @Schema(implementation = OrderResponse.class))),
+                    content = @Content(mediaType = "application/json",schema = @Schema(implementation = OrderResponse.class))),
             @ApiResponse(responseCode = "404", description = "존재하지 않는 리소스 접근",
-                    content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+                    content = @Content(mediaType = "application/json",schema = @Schema(implementation = ErrorResponse.class))),
 
     })
     @GetMapping

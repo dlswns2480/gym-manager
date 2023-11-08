@@ -26,9 +26,9 @@ public class ReviewController {
     @Operation(summary = "리뷰 생성 요청", description = "리뷰 정보가 생성됩니다.", tags = { "ReviewController" })
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "리뷰 정보 생성 성공",
-                    content = @Content(schema = @Schema(implementation = ReviewResponse.class))),
+                    content = @Content(mediaType = "application/json",schema = @Schema(implementation = ReviewResponse.class))),
             @ApiResponse(responseCode = "404", description = "존재하지 않는 리소스 접근",
-                    content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+                    content = @Content(mediaType = "application/json",schema = @Schema(implementation = ErrorResponse.class))),
 
     })
     @PostMapping("/create")
@@ -38,9 +38,9 @@ public class ReviewController {
     @Operation(summary = "리뷰 조회 요청", description = "전체 리뷰 정보를 조회합니다.", tags = { "ReviewController" })
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "전체 리뷰 조회 성공",
-                    content = @Content(schema = @Schema(implementation = ReviewResponse.class))),
+                    content = @Content(mediaType = "application/json",schema = @Schema(implementation = ReviewResponse.class))),
             @ApiResponse(responseCode = "404", description = "존재하지 않는 리소스 접근",
-                    content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+                    content = @Content(mediaType = "application/json",schema = @Schema(implementation = ErrorResponse.class))),
 
     })
     @GetMapping
@@ -50,9 +50,9 @@ public class ReviewController {
     @Operation(summary = "리뷰 조회 요청", description = "특정 점수 이상의 리뷰들을 조회합니다.", tags = { "ReviewController" })
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "리뷰 조회 성공",
-                    content = @Content(schema = @Schema(implementation = ReviewResponse.class))),
+                    content = @Content(mediaType = "application/json",schema = @Schema(implementation = ReviewResponse.class))),
             @ApiResponse(responseCode = "404", description = "존재하지 않는 리소스 접근",
-                    content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+                    content = @Content(mediaType = "application/json",schema = @Schema(implementation = ErrorResponse.class))),
 
     })
     @GetMapping("/{score}")
