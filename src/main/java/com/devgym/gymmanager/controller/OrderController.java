@@ -1,6 +1,5 @@
 package com.devgym.gymmanager.controller;
 
-import com.devgym.gymmanager.dto.request.CreateOrder;
 import com.devgym.gymmanager.dto.request.OrderApiRequest;
 import com.devgym.gymmanager.dto.response.OrderResponse;
 import com.devgym.gymmanager.service.OrderService;
