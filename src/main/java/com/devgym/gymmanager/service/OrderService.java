@@ -2,7 +2,10 @@ package com.devgym.gymmanager.service;
 
 import com.devgym.gymmanager.domain.entity.Member;
 import com.devgym.gymmanager.domain.entity.Order;
+import com.devgym.gymmanager.domain.entity.OrderItem;
+import com.devgym.gymmanager.dto.mapper.OrderItemMapper;
 import com.devgym.gymmanager.dto.request.CreateOrder;
+import com.devgym.gymmanager.dto.request.OrderApiRequest;
 import com.devgym.gymmanager.dto.response.OrderResponse;
 import com.devgym.gymmanager.dto.mapper.OrderResponseMapper;
 import com.devgym.gymmanager.repository.OrderRepository;
@@ -10,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -18,16 +22,26 @@ import java.util.List;
 public class OrderService {
     private final OrderRepository orderRepository;
     private final MemberService memberService;
-    public OrderResponse createOrder(CreateOrder request) {
-        Order order = Order.createOrder(request);
+    private final ItemService itemService;
+    @Transactional
+    public OrderResponse createOrder(OrderApiRequest request) {
+        List<OrderItem> items = new ArrayList<>();
+        for(Long id : request.itemIds()){
+            items.add(itemService.findByIdService(id));
+        }
+        CreateOrder createOrderDto = new CreateOrder(request.memberId(), items);
+
+        Order order = Order.createOrder(createOrderDto);
         Member member = memberService.findByIdService(request.memberId());
+        order.setMember(member);
         Order save = orderRepository.save(order);
-        save.setMember(member);
-        return OrderResponseMapper.toOrderResponse(order);
+
+        return OrderResponseMapper.toOrderResponse(save);
     }
 
     public List<OrderResponse> findAll(){
-        List<Order> all = orderRepository.findAll();
+        List<Order> all = orderRepository.findAllWithMember();
+        System.out.println(all.get(0).getFinalPrice() + ", " + all.get(0).getOrderItems());
         return all.stream()
                 .map(OrderResponseMapper::toOrderResponse)
                 .toList();

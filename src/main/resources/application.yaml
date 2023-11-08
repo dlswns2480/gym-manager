@@ -1,12 +1,14 @@
 spring:
   datasource:
-    url: jdbc:h2:tcp://localhost/~/gym
-    username : sa
-    password :
-    driver-class-name: org.h2.Driver
+#    url: jdbc:h2:tcp://localhost/~/gym
+    url: jdbc:mysql://localhost:3306/gym
+    username : root
+    password : root
+#    driver-class-name: org.h2.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: none
     #      table을 자동으로 만들어는 모드
     properties:
       hibernate:

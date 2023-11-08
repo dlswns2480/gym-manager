@@ -1,6 +1,7 @@
 package com.devgym.gymmanager.controller;
 
 import com.devgym.gymmanager.dto.request.CreateOrder;
+import com.devgym.gymmanager.dto.request.OrderApiRequest;
 import com.devgym.gymmanager.dto.response.OrderResponse;
 import com.devgym.gymmanager.service.OrderService;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +17,7 @@ import java.util.List;
 public class OrderController {
     private final OrderService orderService;
     @PostMapping("/create")
-    public ResponseEntity<OrderResponse> createOrder(@RequestBody CreateOrder order){
+    public ResponseEntity<OrderResponse> createOrder(@RequestBody OrderApiRequest order){
         return new ResponseEntity<>(orderService.createOrder(order), HttpStatus.OK);
     }
 

@@ -1,7 +1,6 @@
 package com.devgym.gymmanager.domain.entity;
 
 import com.devgym.gymmanager.domain.BaseEntity;
-import com.devgym.gymmanager.domain.type.Category;
 import com.devgym.gymmanager.domain.type.OrderStatus;
 import com.devgym.gymmanager.dto.request.CreateOrder;
 import jakarta.persistence.*;
@@ -9,15 +8,16 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Table(name = "orders")
+@Slf4j
 public class Order extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,14 +36,16 @@ public class Order extends BaseEntity {
             this.finalPrice += orderItem.getPrice() * orderItem.getQuantity();
             this.orderItems.add(orderItem);
             orderItem.setOrder(this);
+            System.out.println(orderItem);
         }
         this.status = OrderStatus.ACCPETED;
     }
 
     public static Order createOrder(CreateOrder request) {
-        if(request.orderItems().length > 5){
+        if(request.orderItems().size() > 5){
             throw new IllegalStateException("한번에 5개까지만 주문 가능합니다");
         }
+        List<OrderItem> lst = new ArrayList<>();
         return Order.builder().request(request).build();
     }
     public void setMember(Member member){
