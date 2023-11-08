@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-@Tag(name = "상품 컨트롤러")
+@Tag(name = "OrderItem", description = "주문 상품 API")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/item")

@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-@Tag(name = "트레이너 컨트롤러")
+@Tag(name = "Trainer", description = "트레이너 API")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/trainer")

@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-@Tag(name = "리뷰 컨트롤러")
+@Tag(name = "Review", description = "리뷰 API")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/review")
