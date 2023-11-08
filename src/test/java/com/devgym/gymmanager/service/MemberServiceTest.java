@@ -7,6 +7,7 @@ import com.devgym.gymmanager.domain.type.Membership;
 import com.devgym.gymmanager.dto.request.AddTrainer;
 import com.devgym.gymmanager.dto.request.TrainerRequest;
 import com.devgym.gymmanager.dto.response.MemberResponse;
+import com.devgym.gymmanager.dto.response.TrainerResponse;
 import com.devgym.gymmanager.exception.NotFoundInfoException;
 import com.devgym.gymmanager.repository.MemberRepository;
 import org.junit.jupiter.api.DisplayName;
@@ -95,7 +96,7 @@ class MemberServiceTest {
         when(trainerService.findByIdService(any(Long.class))).thenReturn(trainer);
 
         AddTrainer addTrainer = new AddTrainer(member.getId(), trainer.getId());
-        Long resultId = service.registerTrainer(addTrainer);
+        TrainerResponse trainerResponse = service.registerTrainer(addTrainer);
 
         assertThat(trainer.getMemberList()).contains(member);
     }

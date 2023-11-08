@@ -1,6 +1,7 @@
 package com.devgym.gymmanager.controller;
 
 import com.devgym.gymmanager.repository.MemberRepository;
+import com.devgym.gymmanager.repository.TrainerRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
@@ -19,6 +20,8 @@ public class BaseIntegrationTest {
     protected MockMvc mvc;
     @Autowired
     protected MemberRepository memberRepository;
+    @Autowired
+    protected TrainerRepository trainerRepository;
     public static String asJsonString(final Object obj) {
         try {
             return new ObjectMapper().writeValueAsString(obj);
