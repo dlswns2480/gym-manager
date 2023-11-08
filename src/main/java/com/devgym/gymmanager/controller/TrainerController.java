@@ -20,8 +20,8 @@ public class TrainerController {
     public ResponseEntity<TrainerResponse> createTrainer(@RequestBody TrainerRequest request) {
         return new ResponseEntity<>(trainerService.createTrainer(request), HttpStatus.OK);
     }
-    @GetMapping
-    public ResponseEntity<List<TrainerResponse>> findByCareer(@RequestParam int career){
+    @GetMapping("/{career}")
+    public ResponseEntity<List<TrainerResponse>> findByCareer(@PathVariable int career){
         return new ResponseEntity<>(trainerService.findByCareerGreaterThan(career), HttpStatus.OK);
     }
 }

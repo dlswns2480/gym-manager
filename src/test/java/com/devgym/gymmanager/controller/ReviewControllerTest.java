@@ -1,12 +1,9 @@
 package com.devgym.gymmanager.controller;
 
 import com.devgym.gymmanager.TestData.data.MemberData;
-import com.devgym.gymmanager.TestData.data.ReviewData;
 import com.devgym.gymmanager.domain.entity.Member;
-import com.devgym.gymmanager.domain.entity.Review;
 import com.devgym.gymmanager.dto.request.ReviewRequest;
 import com.devgym.gymmanager.dto.response.ReviewResponse;
-import com.devgym.gymmanager.repository.ReviewRepository;
 import com.devgym.gymmanager.service.ReviewService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,7 +12,6 @@ import org.springframework.http.MediaType;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -26,7 +22,9 @@ class ReviewControllerTest extends BaseIntegrationTest {
     @Test
     @DisplayName("리뷰를 생성할 수 있다")
     void create() throws Exception {
-        ReviewRequest reviewRequest = ReviewData.getReviewRequest();
+        Member member = MemberData.getMember();
+        Member save = memberRepository.save(member);
+        ReviewRequest reviewRequest = new ReviewRequest(save.getId(), 20, "good");
         mvc.perform(post("/review/create")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(asJsonString(reviewRequest)))

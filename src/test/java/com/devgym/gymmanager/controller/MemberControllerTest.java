@@ -47,11 +47,13 @@ class MemberControllerTest extends BaseIntegrationTest {
     @Test
     @DisplayName("회원을 전체 조회할 수 있다")
     void findAll() throws Exception {
+        Member member = MemberData.getMember();
+        memberRepository.save(member);
         mvc.perform(get("/member")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("[0].name").value("hyunjung"))
-                .andExpect(jsonPath("$[0].membership").value(Membership.HALF_YEAR.toString()));
+                .andExpect(jsonPath("[0].name").value(member.getName()))
+                .andExpect(jsonPath("$[0].membership").value(member.getMembership().toString()));
     }
 
     @Test
