@@ -35,10 +35,8 @@ class TrainerControllerTest extends BaseIntegrationTest {
     @Test
     @DisplayName("특정 경력 이상의 트레이너를 전체 조회할 수 있다")
     void findAllByCarrer() throws Exception{
-        MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
         TrainerRequest trainerRequest = TrainerData.getTrainerRequest();
         TrainerResponse trainer = trainerService.createTrainer(trainerRequest);
-        map.add("career", String.valueOf(trainer.career()));
         mvc.perform(get("/trainer/{career}", trainer.career())
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
