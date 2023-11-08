@@ -1,6 +1,6 @@
 package com.devgym.gymmanager.service;
 
-import com.devgym.gymmanager.TestData.member.TrainerData;
+import com.devgym.gymmanager.TestData.data.TrainerData;
 import com.devgym.gymmanager.domain.entity.Trainer;
 import com.devgym.gymmanager.dto.request.TrainerRequest;
 import com.devgym.gymmanager.dto.response.TrainerResponse;

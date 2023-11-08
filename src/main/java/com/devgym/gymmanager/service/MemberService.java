@@ -40,9 +40,11 @@ public class MemberService {
         Member member = memberRepository.findById(memberId).orElseThrow(NotFoundInfoException::new);
         return new MemberResponse(member.getName(), member.getMembership());
     }
-    public MemberResponse findByMembership(Membership membership){
-        Member member = memberRepository.findByMembership(membership).orElseThrow(NotFoundInfoException::new);
-        return new MemberResponse(member.getName(), member.getMembership());
+    public List<MemberResponse> findByMembership(Membership membership){
+        List<Member> all = memberRepository.findByMembership(membership);
+        return all.stream()
+                .map(member -> new MemberResponse(member.getName(), member.getMembership()))
+                .toList();
     }
     public List<MemberResponse> findAllMembers(){
         List<Member> all = memberRepository.findAll();

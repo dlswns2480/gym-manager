@@ -1,4 +1,4 @@
-package com.devgym.gymmanager.TestData.member;
+package com.devgym.gymmanager.TestData.data;
 
 import com.devgym.gymmanager.domain.entity.OrderItem;
 import com.devgym.gymmanager.domain.type.Category;

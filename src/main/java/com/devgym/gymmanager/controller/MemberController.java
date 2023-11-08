@@ -23,7 +23,7 @@ public class MemberController {
         return new ResponseEntity<>(service.createMember(request), HttpStatus.OK);
     }
     @GetMapping("/membership")
-    public ResponseEntity<MemberResponse> findByMemberShip(@RequestBody Membership membership) {
+    public ResponseEntity<List<MemberResponse>> findByMemberShip(@RequestBody Membership membership) {
         return new ResponseEntity<>(service.findByMembership(membership), HttpStatus.OK);
     }
     @GetMapping

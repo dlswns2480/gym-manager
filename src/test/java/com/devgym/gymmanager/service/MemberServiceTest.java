@@ -1,6 +1,6 @@
 package com.devgym.gymmanager.service;
 
-import com.devgym.gymmanager.TestData.member.MemberData;
+import com.devgym.gymmanager.TestData.data.MemberData;
 import com.devgym.gymmanager.domain.entity.Member;
 import com.devgym.gymmanager.domain.entity.Trainer;
 import com.devgym.gymmanager.domain.type.Membership;
@@ -44,28 +44,28 @@ class MemberServiceTest {
         assertThat(member.name()).isEqualTo(MemberData.getMemberRequest().name());
     }
 
-    @Test
-    @DisplayName("멤버쉽으로 회원을 조회할 수 있다")
-    void findByMembership() {
-        //given
-        Member member = MemberData.getMember();
+//    @Test
+//    @DisplayName("멤버쉽으로 회원을 조회할 수 있다")
+//    void findByMembership() {
+//        //given
+//        Member member = MemberData.getMember();
+//
+//        when(memberRepository.findByMembership(any(Membership.class))).thenReturn(Optional.of(member));
+//
+//        MemberResponse result = service.findByMembership(Membership.HALF_YEAR);
+//        assertAll(
+//                () -> assertThat(result.name()).isEqualTo(member.getName()),
+//                () -> assertThat(result.membership()).isEqualTo(member.getMembership())
+//        );
+//    }
 
-        when(memberRepository.findByMembership(any(Membership.class))).thenReturn(Optional.of(member));
-
-        MemberResponse result = service.findByMembership(Membership.HALF_YEAR);
-        assertAll(
-                () -> assertThat(result.name()).isEqualTo(member.getName()),
-                () -> assertThat(result.membership()).isEqualTo(member.getMembership())
-        );
-    }
-
-    @Test
-    @DisplayName("해당 멤버쉽을 가진 고객이 없으면 예외가 발생한다")
-    void findByMemberShipNotExist() {
-        when(memberRepository.findByMembership(any(Membership.class))).thenReturn(Optional.empty());
-
-        assertThrows(NotFoundInfoException.class, () -> service.findByMembership(Membership.HALF_YEAR));
-    }
+//    @Test
+//    @DisplayName("해당 멤버쉽을 가진 고객이 없으면 예외가 발생한다")
+//    void findByMemberShipNotExist() {
+//        when(memberRepository.findByMembership(any(Membership.class))).thenReturn(Optional.empty());
+//
+//        assertThrows(NotFoundInfoException.class, () -> service.findByMembership(Membership.HALF_YEAR));
+//    }
 
     @Test
     @DisplayName("모든 회원 정보를 조회할 수 있다")

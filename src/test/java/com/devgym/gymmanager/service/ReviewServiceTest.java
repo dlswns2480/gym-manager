@@ -1,23 +1,18 @@
 package com.devgym.gymmanager.service;
 
-import com.devgym.gymmanager.TestData.member.MemberData;
-import com.devgym.gymmanager.TestData.member.ReviewData;
+import com.devgym.gymmanager.TestData.data.MemberData;
+import com.devgym.gymmanager.TestData.data.ReviewData;
 import com.devgym.gymmanager.domain.entity.Member;
 import com.devgym.gymmanager.domain.entity.Review;
 import com.devgym.gymmanager.dto.request.ReviewRequest;
 import com.devgym.gymmanager.dto.response.ReviewResponse;
 import com.devgym.gymmanager.repository.ReviewRepository;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.test.util.ReflectionTestUtils;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
