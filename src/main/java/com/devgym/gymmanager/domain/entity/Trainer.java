@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -19,15 +20,17 @@ public class Trainer extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "trainer_id")
     private Long id;
+
     private String name;
     private String phoneNumber;
     private int career;
     private int hourlyPrice;
+
     @OneToMany(mappedBy = "trainer", fetch = FetchType.LAZY)
     private List<Member> memberList = new ArrayList<>();
 
     @Builder(access = AccessLevel.PRIVATE)
-    public Trainer(TrainerRequest trainerRequest) {
+    private Trainer(TrainerRequest trainerRequest) {
         this.name = trainerRequest.name();
         this.phoneNumber = trainerRequest.phoneNumber();
         this.career = trainerRequest.career();
@@ -39,5 +42,18 @@ public class Trainer extends BaseEntity {
             throw new IllegalStateException("올바르지 않은 전화번호 형식입니다");
         }
         return Trainer.builder().trainerRequest(trainerRequest).build();
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
+        Trainer trainer = (Trainer) object;
+        return career == trainer.career && hourlyPrice == trainer.hourlyPrice && Objects.equals(id, trainer.id) && Objects.equals(name, trainer.name) && Objects.equals(phoneNumber, trainer.phoneNumber) && Objects.equals(memberList, trainer.memberList);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, phoneNumber, career, hourlyPrice, memberList);
     }
 }

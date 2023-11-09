@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -51,5 +52,18 @@ public class Order extends BaseEntity {
     public void setMember(Member member){
         this.member = member;
         member.getOrders().add(this);
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
+        Order order = (Order) object;
+        return finalPrice == order.finalPrice && Objects.equals(id, order.id) && status == order.status && Objects.equals(orderItems, order.orderItems) && Objects.equals(member, order.member);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, status, finalPrice, orderItems, member);
     }
 }

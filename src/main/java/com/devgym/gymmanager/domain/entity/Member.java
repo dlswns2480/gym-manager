@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -19,16 +20,18 @@ public class Member extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "member_id")
     private Long id;
+
     private String name;
     private String phoneNumber;
     private Membership membership;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "trainer_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private Trainer trainer;
-    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
-    private List<Review> reviewList = new ArrayList<>();
+
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
     private List<Order> orders = new ArrayList<>();
+
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
     private List<Review> reviews = new ArrayList<>();
 
@@ -56,4 +59,16 @@ public class Member extends BaseEntity {
         trainer.getMemberList().add(this);
     }
 
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
+        Member member = (Member) object;
+        return Objects.equals(id, member.id) && Objects.equals(name, member.name) && Objects.equals(phoneNumber, member.phoneNumber) && membership == member.membership && Objects.equals(trainer, member.trainer) && Objects.equals(orders, member.orders) && Objects.equals(reviews, member.reviews);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, phoneNumber, membership, trainer, orders, reviews);
+    }
 }
