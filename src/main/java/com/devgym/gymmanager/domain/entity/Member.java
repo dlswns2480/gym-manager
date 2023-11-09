@@ -5,6 +5,7 @@ import com.devgym.gymmanager.domain.type.Membership;
 import com.devgym.gymmanager.dto.request.MemberRequest;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -15,6 +16,7 @@ import java.util.Objects;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class Member extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -59,16 +61,4 @@ public class Member extends BaseEntity {
         trainer.getMemberList().add(this);
     }
 
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        Member member = (Member) object;
-        return Objects.equals(id, member.id) && Objects.equals(name, member.name) && Objects.equals(phoneNumber, member.phoneNumber) && membership == member.membership && Objects.equals(trainer, member.trainer) && Objects.equals(orders, member.orders) && Objects.equals(reviews, member.reviews);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, phoneNumber, membership, trainer, orders, reviews);
-    }
 }

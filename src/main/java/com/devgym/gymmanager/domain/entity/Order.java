@@ -4,10 +4,7 @@ import com.devgym.gymmanager.domain.BaseEntity;
 import com.devgym.gymmanager.domain.type.OrderStatus;
 import com.devgym.gymmanager.dto.request.CreateOrder;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
@@ -18,7 +15,7 @@ import java.util.Objects;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Table(name = "orders")
-@Slf4j
+@EqualsAndHashCode(callSuper = false)
 public class Order extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -54,16 +51,4 @@ public class Order extends BaseEntity {
         member.getOrders().add(this);
     }
 
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        Order order = (Order) object;
-        return finalPrice == order.finalPrice && Objects.equals(id, order.id) && status == order.status && Objects.equals(orderItems, order.orderItems) && Objects.equals(member, order.member);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, status, finalPrice, orderItems, member);
-    }
 }
