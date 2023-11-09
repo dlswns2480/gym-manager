@@ -12,7 +12,6 @@ import java.util.Objects;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-@EqualsAndHashCode(callSuper = false)
 public class Trainer extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,4 +41,16 @@ public class Trainer extends BaseEntity {
         return Trainer.builder().trainerRequest(trainerRequest).build();
     }
 
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
+        Trainer trainer = (Trainer) object;
+        return career == trainer.career && hourlyPrice == trainer.hourlyPrice && Objects.equals(id, trainer.id) && Objects.equals(name, trainer.name) && Objects.equals(phoneNumber, trainer.phoneNumber);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, phoneNumber, career, hourlyPrice);
+    }
 }

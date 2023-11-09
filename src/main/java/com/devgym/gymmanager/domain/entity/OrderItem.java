@@ -11,7 +11,6 @@ import java.util.Objects;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-@EqualsAndHashCode(callSuper = false)
 public class OrderItem extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,4 +43,16 @@ public class OrderItem extends BaseEntity {
         this.order = order;
     }
 
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
+        OrderItem orderItem = (OrderItem) object;
+        return price == orderItem.price && quantity == orderItem.quantity && Objects.equals(id, orderItem.id) && Objects.equals(name, orderItem.name) && category == orderItem.category;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, category, price, quantity);
+    }
 }

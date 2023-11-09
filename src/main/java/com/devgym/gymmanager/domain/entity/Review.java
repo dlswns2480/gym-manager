@@ -10,7 +10,6 @@ import java.util.Objects;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-@EqualsAndHashCode(callSuper = false)
 public class Review extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,4 +41,16 @@ public class Review extends BaseEntity {
         member.getReviews().add(this);
     }
 
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
+        Review review = (Review) object;
+        return score == review.score && Objects.equals(id, review.id) && Objects.equals(content, review.content);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, score, content);
+    }
 }
