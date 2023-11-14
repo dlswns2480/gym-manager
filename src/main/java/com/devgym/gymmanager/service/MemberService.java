@@ -26,13 +26,13 @@ public class MemberService {
     @Transactional
     public MemberResponse createMember(MemberRequest request){
         validateDuplicate(request); // 중복검증
-        Member member = Member.createMember(request);
-        Member result = memberRepository.save(member);
+        Member member = Member.createMember(request); // 회원 생성
+        Member result = memberRepository.save(member); // 회원 저장
         return new MemberResponse(result.getName(), result.getMembership());
     }
     @Transactional
     public TrainerResponse registerTrainer(AddTrainer request) {
-        Trainer trainer = trainerService.findByIdService(request.trainerId());
+        Trainer trainer = trainerService.findByIdService(request.trainerId()); // 트레이너가 있는 지 확인
         Member member = memberRepository.findById(request.memberId()).orElseThrow(NotFoundInfoException::new);
         member.setTrainer(trainer);
         return new TrainerResponse(trainer.getName(), trainer.getPhoneNumber(), trainer.getCareer(), trainer.getHourlyPrice());

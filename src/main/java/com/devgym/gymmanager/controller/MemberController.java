@@ -30,7 +30,7 @@ public class MemberController {
             @ApiResponse(responseCode = "200", description = "회원 정보 생성 성공",
                     content = @Content(mediaType = "application/json",schema = @Schema(implementation = MemberResponse.class))),
             @ApiResponse(responseCode = "404", description = "존재하지 않는 리소스 접근",
-                    content = @Content(mediaType = "application/json",schema = @Schema(implementation = ErrorResponse.class))),
+                    content = @Content(mediaType = "application/json",schema = @Schema(implementation = ErrorResponse.class))), //usereturntype
 
     })
     @PostMapping("/create")

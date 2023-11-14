@@ -17,6 +17,7 @@ public class Review extends BaseEntity {
     private Long id;
     private int score;
     private String content;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private Member member;
@@ -25,9 +26,8 @@ public class Review extends BaseEntity {
         this.score = reviewRequest.score();
         this.content = reviewRequest.content();
     }
-    public static Review createReview(ReviewRequest reviewRequest){
+    public static Review createReview(ReviewRequest reviewRequest){ //아예 생성자로도 고려
         int score = reviewRequest.score();
-        String content = reviewRequest.content();
         if(score > 100){
             throw new IllegalStateException("100점 미만의 점수만 입력 가능합니다");
         }

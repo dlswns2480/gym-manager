@@ -21,8 +21,8 @@ public class ReviewService {
     * 리뷰 생성*/
     @Transactional
     public ReviewResponse createReview(ReviewRequest request){
-        Member member = memberService.findByIdService(request.memberId());
-        Review review = Review.createReview(request);
+        Member member = memberService.findByIdService(request.memberId()); // 회원 확인
+        Review review = Review.createReview(request); // 리뷰 생성
         review.setMember(member);
         Review result = reviewRepository.save(review);
         return new ReviewResponse(member.getName(), result.getScore(), result.getContent());

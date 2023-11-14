@@ -24,13 +24,14 @@ public class Member extends BaseEntity {
 
     private String name;
     private String phoneNumber;
+    @Enumerated(value = EnumType.STRING)
     private Membership membership;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "trainer_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private Trainer trainer;
 
-    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY) // lazy가 디폴트이다!!
     private List<Order> orders = new ArrayList<>();
 
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)

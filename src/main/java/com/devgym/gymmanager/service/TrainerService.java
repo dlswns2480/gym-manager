@@ -25,6 +25,7 @@ public class TrainerService {
             throw new DuplicateRequestException("이미 존재하는 트레이너입니다");
         }
     }
+    @Transactional
     public TrainerResponse createTrainer(TrainerRequest request){
         validateDuplicateTrainer(request.phoneNumber());
         Trainer trainer = Trainer.createTrainer(request);
