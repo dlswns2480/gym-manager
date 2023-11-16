@@ -4,13 +4,15 @@ import com.devgym.gymmanager.domain.entity.OrderItem;
 import com.devgym.gymmanager.dto.mapper.OrderItemMapper;
 import com.devgym.gymmanager.dto.request.CreateOrderItem;
 import com.devgym.gymmanager.dto.response.OrderItemResponse;
-import com.devgym.gymmanager.exception.NotFoundInfoException;
+import com.devgym.gymmanager.exception.CustomException;
 import com.devgym.gymmanager.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+
+import static com.devgym.gymmanager.exception.ErrorCode.*;
 
 @Service
 @RequiredArgsConstructor
@@ -31,6 +33,6 @@ public class ItemService {
     }
 
     public OrderItem findByIdService(Long itemId) {
-        return itemRepository.findById(itemId).orElseThrow(NotFoundInfoException::new);
+        return itemRepository.findById(itemId).orElseThrow(() -> new CustomException(NOT_EXIST_ITEM));
     }
 }

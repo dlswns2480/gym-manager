@@ -7,7 +7,7 @@ import com.devgym.gymmanager.dto.request.AddTrainer;
 import com.devgym.gymmanager.dto.request.MemberRequest;
 import com.devgym.gymmanager.dto.response.MemberResponse;
 import com.devgym.gymmanager.dto.response.TrainerResponse;
-import com.devgym.gymmanager.exception.NotFoundInfoException;
+import com.devgym.gymmanager.exception.CustomException;
 import com.devgym.gymmanager.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,6 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+
+import static com.devgym.gymmanager.exception.ErrorCode.*;
 
 @Service
 @Transactional(readOnly = true)
@@ -33,7 +35,7 @@ public class MemberService {
     @Transactional
     public TrainerResponse registerTrainer(AddTrainer request) {
         Trainer trainer = trainerService.findByIdService(request.trainerId()); // 트레이너가 있는 지 확인
-        Member member = memberRepository.findById(request.memberId()).orElseThrow(NotFoundInfoException::new);
+        Member member = memberRepository.findById(request.memberId()).orElseThrow(() -> new CustomException(NOT_EXIST_MEMBER));
         member.setTrainer(trainer);
         return new TrainerResponse(trainer.getName(), trainer.getPhoneNumber(), trainer.getCareer(), trainer.getHourlyPrice());
     }
@@ -57,7 +59,7 @@ public class MemberService {
     }
 
     public Member findByIdService(Long memberId) {
-        return memberRepository.findById(memberId).orElseThrow(NotFoundInfoException::new);
+        return memberRepository.findById(memberId).orElseThrow(() -> new CustomException(NOT_EXIST_MEMBER));
     }
 
 

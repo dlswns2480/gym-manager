@@ -3,7 +3,7 @@ package com.devgym.gymmanager.service;
 import com.devgym.gymmanager.domain.entity.Trainer;
 import com.devgym.gymmanager.dto.request.TrainerRequest;
 import com.devgym.gymmanager.dto.response.TrainerResponse;
-import com.devgym.gymmanager.exception.NotFoundInfoException;
+import com.devgym.gymmanager.exception.CustomException;
 import com.devgym.gymmanager.repository.TrainerRepository;
 import com.sun.jdi.request.DuplicateRequestException;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+
+import static com.devgym.gymmanager.exception.ErrorCode.*;
 
 @Service
 @Transactional(readOnly = true)
@@ -44,7 +46,7 @@ public class TrainerService {
     }
 
     public Trainer findByIdService(Long trainerId) {
-        return trainerRepository.findById(trainerId).orElseThrow(NotFoundInfoException::new);
+        return trainerRepository.findById(trainerId).orElseThrow(() -> new CustomException(NOT_EXIST_TRAINER));
     }
 
 }
