@@ -5,7 +5,6 @@ import com.devgym.gymmanager.domain.type.Membership;
 import com.devgym.gymmanager.dto.request.MemberRequest;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -31,10 +30,10 @@ public class Member extends BaseEntity {
     @JoinColumn(name = "trainer_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private Trainer trainer;
 
-    @OneToMany(mappedBy = "member") // lazy가 디폴트이다!!
+    @OneToMany(mappedBy = "member", orphanRemoval = true) // lazy가 디폴트이다!!
     private List<Order> orders = new ArrayList<>();
 
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "member", orphanRemoval = true)
     private List<Review> reviews = new ArrayList<>();
 
     private Member(String name, String phoneNumber, Membership membership) {
