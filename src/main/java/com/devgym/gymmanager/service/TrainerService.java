@@ -43,7 +43,7 @@ public class TrainerService {
                 .toList();
     }
 
-    protected Trainer findByIdService(Long trainerId) {
+    public Trainer findByIdService(Long trainerId) {
         return trainerRepository.findById(trainerId).orElseThrow(NotFoundInfoException::new);
     }
 

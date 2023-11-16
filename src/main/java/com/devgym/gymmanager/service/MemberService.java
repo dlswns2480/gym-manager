@@ -37,10 +37,6 @@ public class MemberService {
         member.setTrainer(trainer);
         return new TrainerResponse(trainer.getName(), trainer.getPhoneNumber(), trainer.getCareer(), trainer.getHourlyPrice());
     }
-    public MemberResponse findById(Long memberId) {
-        Member member = memberRepository.findById(memberId).orElseThrow(NotFoundInfoException::new);
-        return new MemberResponse(member.getName(), member.getMembership());
-    }
     public List<MemberResponse> findByMembership(Membership membership){
         List<Member> all = memberRepository.findByMembership(membership);
         return all.stream()
@@ -60,7 +56,7 @@ public class MemberService {
         }
     }
 
-    protected Member findByIdService(Long memberId) {
+    public Member findByIdService(Long memberId) {
         return memberRepository.findById(memberId).orElseThrow(NotFoundInfoException::new);
     }
 

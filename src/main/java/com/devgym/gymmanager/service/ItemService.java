@@ -30,7 +30,7 @@ public class ItemService {
                 .toList();
     }
 
-    protected OrderItem findByIdService(Long itemId) {
+    public OrderItem findByIdService(Long itemId) {
         return itemRepository.findById(itemId).orElseThrow(NotFoundInfoException::new);
     }
 }
