@@ -23,7 +23,7 @@ public class Trainer extends BaseEntity {
     private int career;
     private int hourlyPrice;
 
-    @OneToMany(mappedBy = "trainer", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "trainer")
     private List<Member> memberList = new ArrayList<>();
 
     @Builder(access = AccessLevel.PRIVATE)
