@@ -31,6 +31,7 @@ public class Review extends BaseEntity {
         if(score > 100){
             throw new IllegalStateException("100점 미만의 점수만 입력 가능합니다");
         }
+
         return Review.builder().reviewRequest(reviewRequest).build();
     }
     public void setMember(Member member){

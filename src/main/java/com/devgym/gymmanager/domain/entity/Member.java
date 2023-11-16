@@ -31,10 +31,10 @@ public class Member extends BaseEntity {
     @JoinColumn(name = "trainer_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private Trainer trainer;
 
-    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY) // lazy가 디폴트이다!!
+    @OneToMany(mappedBy = "member") // lazy가 디폴트이다!!
     private List<Order> orders = new ArrayList<>();
 
-    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "member")
     private List<Review> reviews = new ArrayList<>();
 
     private Member(String name, String phoneNumber, Membership membership) {
