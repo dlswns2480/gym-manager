@@ -3,7 +3,6 @@ package com.devgym.gymmanager.service;
 import com.devgym.gymmanager.domain.entity.Member;
 import com.devgym.gymmanager.domain.entity.Review;
 import com.devgym.gymmanager.dto.request.ApiReviewRequest;
-import com.devgym.gymmanager.dto.request.CreateReview;
 import com.devgym.gymmanager.dto.request.ReviewRequest;
 import com.devgym.gymmanager.dto.response.ReviewResponse;
 import com.devgym.gymmanager.repository.ReviewRepository;
