@@ -1,6 +1,7 @@
 package com.devgym.gymmanager.domain.entity;
 
 import com.devgym.gymmanager.domain.BaseEntity;
+import com.devgym.gymmanager.dto.request.ApiReviewRequest;
 import com.devgym.gymmanager.dto.request.ReviewRequest;
 import jakarta.persistence.*;
 import lombok.*;
@@ -22,11 +23,12 @@ public class Review extends BaseEntity {
     @JoinColumn(name = "member_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private Member member;
     @Builder(access = AccessLevel.PRIVATE)
-    private Review(ReviewRequest reviewRequest){
+    private Review(ApiReviewRequest reviewRequest){
+        setMember(reviewRequest.member());
         this.score = reviewRequest.score();
         this.content = reviewRequest.content();
     }
-    public static Review createReview(ReviewRequest reviewRequest){ //아예 생성자로도 고려
+    public static Review createReview(ApiReviewRequest reviewRequest){ //아예 생성자로도 고려
         int score = reviewRequest.score();
         if(score > 100){
             throw new IllegalStateException("100점 미만의 점수만 입력 가능합니다");

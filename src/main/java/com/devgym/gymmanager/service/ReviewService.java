@@ -2,6 +2,7 @@ package com.devgym.gymmanager.service;
 
 import com.devgym.gymmanager.domain.entity.Member;
 import com.devgym.gymmanager.domain.entity.Review;
+import com.devgym.gymmanager.dto.request.ApiReviewRequest;
 import com.devgym.gymmanager.dto.request.CreateReview;
 import com.devgym.gymmanager.dto.request.ReviewRequest;
 import com.devgym.gymmanager.dto.response.ReviewResponse;
@@ -23,8 +24,8 @@ public class ReviewService {
     @Transactional
     public ReviewResponse createReview(ReviewRequest request){
         Member member = memberService.findByIdService(request.memberId()); // 회원 확인
-        Review review = Review.createReview(request); // 리뷰 생성
-        review.setMember(member);
+        ApiReviewRequest apiReviewRequest = new ApiReviewRequest(member, request.score(), request.content());
+        Review review = Review.createReview(apiReviewRequest); // 리뷰 생성
         Review result = reviewRepository.save(review);
         return new ReviewResponse(member.getName(), result.getScore(), result.getContent());
     }

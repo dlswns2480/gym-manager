@@ -4,6 +4,7 @@ import com.devgym.gymmanager.TestData.data.MemberData;
 import com.devgym.gymmanager.TestData.data.ReviewData;
 import com.devgym.gymmanager.domain.entity.Member;
 import com.devgym.gymmanager.domain.entity.Review;
+import com.devgym.gymmanager.dto.request.ApiReviewRequest;
 import com.devgym.gymmanager.dto.request.ReviewRequest;
 import com.devgym.gymmanager.dto.response.ReviewResponse;
 import com.devgym.gymmanager.repository.ReviewRepository;
@@ -31,12 +32,13 @@ class ReviewServiceTest {
     @Test
     @DisplayName("리뷰를 생성할 수 있다")
     void create() {
-        ReviewRequest reviewRequest = ReviewData.getReviewRequest();
+        ApiReviewRequest ApireviewRequest = ReviewData.getReviewRequest2();
+        ReviewRequest reviewRequest = new ReviewRequest(1L, ApireviewRequest.score(), ApireviewRequest.content());
         Member member = MemberData.getMember();
 
         when(memberService.findByIdService(any(Long.class))).thenReturn(member);
         when(reviewRepository.save(any(Review.class)))
-                .thenReturn(Review.createReview(reviewRequest));
+                .thenReturn(Review.createReview(ApireviewRequest));
 
         ReviewResponse review = reviewService.createReview(reviewRequest);
 
