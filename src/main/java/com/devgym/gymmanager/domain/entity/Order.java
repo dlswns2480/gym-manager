@@ -41,13 +41,7 @@ public class Order extends BaseEntity {
         this.status = OrderStatus.ACCPETED;
     }
 
-//    public static Order createOrder(CreateOrder request) {
-//        if(request.orderItems().size() > 5){
-//            throw new IllegalStateException("한번에 5개까지만 주문 가능합니다");
-//        }
-//        List<OrderItem> lst = new ArrayList<>();
-//        return Order.builder().request(request).build();
-//    }
+
     public static Order createOrder(ApiCreateOrder request) {
         if(request.orderItems().size() > 5){
             throw new IllegalStateException("한번에 5개까지만 주문 가능합니다");
@@ -55,6 +49,7 @@ public class Order extends BaseEntity {
         List<OrderItem> lst = new ArrayList<>();
         return Order.builder().request(request).build();
     }
+    //테스트용 메서드
     public void setMember(Member member){
         this.member = member;
         member.getOrders().add(this);

@@ -5,7 +5,6 @@ import com.devgym.gymmanager.domain.entity.Order;
 import com.devgym.gymmanager.domain.entity.OrderItem;
 import com.devgym.gymmanager.dto.mapper.OrderResponseMapper;
 import com.devgym.gymmanager.dto.request.ApiCreateOrder;
-import com.devgym.gymmanager.dto.request.CreateOrder;
 import com.devgym.gymmanager.dto.request.OrderApiRequest;
 import com.devgym.gymmanager.dto.response.OrderResponse;
 import com.devgym.gymmanager.repository.OrderRepository;
@@ -29,7 +28,6 @@ public class OrderService {
         for(Long id : request.itemIds()){
             items.add(itemService.findByIdService(id));
         }
-        CreateOrder createOrderDto = new CreateOrder(request.memberId(), items);
         Member member = memberService.findByIdService(request.memberId());
         ApiCreateOrder apiCreateOrder = new ApiCreateOrder(member, items);
         Order order = Order.createOrder(apiCreateOrder); //생성 시 회원 set까지 한번에
