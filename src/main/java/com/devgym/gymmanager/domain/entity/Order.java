@@ -2,14 +2,15 @@ package com.devgym.gymmanager.domain.entity;
 
 import com.devgym.gymmanager.domain.BaseEntity;
 import com.devgym.gymmanager.domain.type.OrderStatus;
-import com.devgym.gymmanager.dto.request.CreateOrder;
+import com.devgym.gymmanager.dto.request.ApiCreateOrder;
 import jakarta.persistence.*;
-import lombok.*;
-import lombok.extern.slf4j.Slf4j;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -28,17 +29,26 @@ public class Order extends BaseEntity {
     private Member member;
 
     @Builder(access = AccessLevel.PRIVATE)
-    private Order(CreateOrder request) {
+    private Order(ApiCreateOrder request) {
         for (OrderItem orderItem : request.orderItems()) {
             this.finalPrice += orderItem.getPrice() * orderItem.getQuantity();
             this.orderItems.add(orderItem);
             orderItem.setOrder(this);
             System.out.println(orderItem);
         }
+        this.member = request.member();
+        member.getOrders().add(this);
         this.status = OrderStatus.ACCPETED;
     }
 
-    public static Order createOrder(CreateOrder request) {
+//    public static Order createOrder(CreateOrder request) {
+//        if(request.orderItems().size() > 5){
+//            throw new IllegalStateException("한번에 5개까지만 주문 가능합니다");
+//        }
+//        List<OrderItem> lst = new ArrayList<>();
+//        return Order.builder().request(request).build();
+//    }
+    public static Order createOrder(ApiCreateOrder request) {
         if(request.orderItems().size() > 5){
             throw new IllegalStateException("한번에 5개까지만 주문 가능합니다");
         }
