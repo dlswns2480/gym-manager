@@ -1,5 +1,6 @@
 package com.devgym.gymmanager.auth.utils;
 
+import com.devgym.gymmanager.exception.CustomException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -15,6 +16,9 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 import java.util.List;
+
+import static com.devgym.gymmanager.exception.ErrorCode.*;
+
 @RequiredArgsConstructor
 @Slf4j
 public class JwtFilter extends OncePerRequestFilter {
@@ -23,27 +27,24 @@ public class JwtFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String authorization = request.getHeader(HttpHeaders.AUTHORIZATION);
         if(authorization == null){
-            log.info("authrization이 없습니다.");
             filterChain.doFilter(request, response);
-            return;
+            throw new CustomException(NOT_EXIST_TOKEN);
         }
         if (!authorization.startsWith("Bearer")){
-            log.info("toekn이 Bearer가 아닙니다");
             filterChain.doFilter(request, response);
-            return;
+            throw new CustomException(NOT_BEARER_TOKEN);
         }
         String token = authorization.split(" ")[1];
-        log.info("token : {}", token);
-        if(JwtUtil.isExpired(token, secretKey)){
-            log.info("Token이 만료되었다.");
+
+        if(JwtUtil.isExpired(token, secretKey)){ //토큰이 만료된 경우,
             filterChain.doFilter(request, response);
-            return;
+            throw new CustomException(EXPIRED_TOKEN);
         }
         String memberName = JwtUtil.getMemberName(token, secretKey);
         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(memberName, null, List.of(new SimpleGrantedAuthority("USER")));
 
         authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+        SecurityContextHolder.getContext().setAuthentication(authentication); //이제 이 authentication에 접근하여 name값 접근 가능
         filterChain.doFilter(request, response);
     }
 }
