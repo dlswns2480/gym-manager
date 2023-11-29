@@ -20,10 +20,14 @@ public class Order extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private OrderStatus status;
+
     private int finalPrice;
+
     @OneToMany(mappedBy = "order")
     private List<OrderItem> orderItems = new ArrayList<>();
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private Member member;
