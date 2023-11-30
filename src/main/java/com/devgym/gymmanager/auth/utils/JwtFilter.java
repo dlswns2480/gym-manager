@@ -1,6 +1,5 @@
 package com.devgym.gymmanager.auth.utils;
 
-import com.devgym.gymmanager.exception.CustomException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -27,18 +26,21 @@ public class JwtFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String authorization = request.getHeader(HttpHeaders.AUTHORIZATION);
         if(authorization == null){
+            log.info(NOT_EXIST_TOKEN.getMessage());
             filterChain.doFilter(request, response);
-            throw new CustomException(NOT_EXIST_TOKEN);
+            return;
         }
         if (!authorization.startsWith("Bearer")){
+            log.info(NOT_BEARER_TOKEN.getMessage());
             filterChain.doFilter(request, response);
-            throw new CustomException(NOT_BEARER_TOKEN);
+            return;
         }
         String token = authorization.split(" ")[1];
 
         if(JwtUtil.isExpired(token, secretKey)){ //토큰이 만료된 경우,
+            log.info(EXPIRED_TOKEN.getMessage());
             filterChain.doFilter(request, response);
-            throw new CustomException(EXPIRED_TOKEN);
+            return;
         }
         String memberName = JwtUtil.getMemberName(token, secretKey);
         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(memberName, null, List.of(new SimpleGrantedAuthority("USER")));
