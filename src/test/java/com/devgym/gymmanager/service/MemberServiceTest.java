@@ -3,32 +3,33 @@ package com.devgym.gymmanager.service;
 import com.devgym.gymmanager.TestData.data.MemberData;
 import com.devgym.gymmanager.domain.entity.Member;
 import com.devgym.gymmanager.domain.entity.Trainer;
-import com.devgym.gymmanager.domain.type.Membership;
 import com.devgym.gymmanager.dto.request.AddTrainer;
 import com.devgym.gymmanager.dto.request.TrainerRequest;
 import com.devgym.gymmanager.dto.response.MemberResponse;
 import com.devgym.gymmanager.dto.response.TrainerResponse;
-import com.devgym.gymmanager.exception.NotFoundInfoException;
 import com.devgym.gymmanager.repository.MemberRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-@ExtendWith(SpringExtension.class)
+@ExtendWith(MockitoExtension.class)
 class MemberServiceTest {
+    @Mock
+    BCryptPasswordEncoder encoder;
     @Mock
     MemberRepository memberRepository;
     @Mock
@@ -39,10 +40,11 @@ class MemberServiceTest {
     @Test
     @DisplayName("회원 생성에 성공한다")
     void save() {
+        when(encoder.encode(any(CharSequence.class))).thenReturn("password");
         when(memberRepository.save(any(Member.class))).thenReturn(MemberData.getMember());
-        MemberResponse member = service.createMember(MemberData.getMemberRequest());
+        MemberResponse member = service.signUp(MemberData.getMemberRequest());
 
-        assertThat(member.name()).isEqualTo(MemberData.getMemberRequest().name());
+        assertThat(member.name()).isEqualTo(MemberData.getMemberRequest().memberName());
     }
 
 //    @Test
