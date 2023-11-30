@@ -1,8 +1,8 @@
 package com.devgym.gymmanager.TestData.data;
 
-import com.devgym.gymmanager.auth.dto.SignUpRequest;
-import com.devgym.gymmanager.domain.entity.Member;
-import com.devgym.gymmanager.domain.type.Membership;
+import com.devgym.gymmanager.member.dto.request.SignUpRequest;
+import com.devgym.gymmanager.member.domain.Member;
+import com.devgym.gymmanager.member.domain.Membership;
 
 public class MemberData {
     public static SignUpRequest getMemberRequest(){

@@ -1,8 +1,8 @@
 package com.devgym.gymmanager.TestData.data;
 
-import com.devgym.gymmanager.domain.entity.OrderItem;
-import com.devgym.gymmanager.domain.type.Category;
-import com.devgym.gymmanager.dto.request.CreateOrderItem;
+import com.devgym.gymmanager.orderitem.domain.OrderItem;
+import com.devgym.gymmanager.orderitem.domain.Category;
+import com.devgym.gymmanager.orderitem.dto.request.CreateOrderItem;
 
 public class ItemData {
     public static CreateOrderItem getItemDto(){

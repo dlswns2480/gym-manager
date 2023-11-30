@@ -1,13 +1,15 @@
 package com.devgym.gymmanager.service;
 
 import com.devgym.gymmanager.TestData.data.MemberData;
-import com.devgym.gymmanager.domain.entity.Member;
-import com.devgym.gymmanager.domain.entity.Trainer;
-import com.devgym.gymmanager.dto.request.AddTrainer;
-import com.devgym.gymmanager.dto.request.TrainerRequest;
-import com.devgym.gymmanager.dto.response.MemberResponse;
-import com.devgym.gymmanager.dto.response.TrainerResponse;
-import com.devgym.gymmanager.repository.MemberRepository;
+import com.devgym.gymmanager.member.application.MemberService;
+import com.devgym.gymmanager.member.domain.Member;
+import com.devgym.gymmanager.trainer.domain.Trainer;
+import com.devgym.gymmanager.trainer.dto.request.AddTrainer;
+import com.devgym.gymmanager.trainer.application.TrainerService;
+import com.devgym.gymmanager.trainer.dto.request.TrainerRequest;
+import com.devgym.gymmanager.member.dto.response.MemberResponse;
+import com.devgym.gymmanager.trainer.dto.response.TrainerResponse;
+import com.devgym.gymmanager.member.repository.MemberRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

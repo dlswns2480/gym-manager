@@ -2,11 +2,11 @@ package com.devgym.gymmanager.controller;
 
 import com.devgym.gymmanager.TestData.data.MemberData;
 import com.devgym.gymmanager.TestData.data.TrainerData;
-import com.devgym.gymmanager.auth.dto.SignUpRequest;
-import com.devgym.gymmanager.domain.entity.Member;
-import com.devgym.gymmanager.domain.entity.Trainer;
-import com.devgym.gymmanager.domain.type.Membership;
-import com.devgym.gymmanager.dto.request.AddTrainer;
+import com.devgym.gymmanager.member.dto.request.SignUpRequest;
+import com.devgym.gymmanager.member.domain.Member;
+import com.devgym.gymmanager.trainer.domain.Trainer;
+import com.devgym.gymmanager.member.domain.Membership;
+import com.devgym.gymmanager.trainer.dto.request.AddTrainer;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;

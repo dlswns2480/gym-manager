@@ -1,10 +1,11 @@
 package com.devgym.gymmanager.service;
 
 import com.devgym.gymmanager.TestData.data.ItemData;
-import com.devgym.gymmanager.domain.entity.OrderItem;
-import com.devgym.gymmanager.dto.request.CreateOrderItem;
-import com.devgym.gymmanager.dto.response.OrderItemResponse;
-import com.devgym.gymmanager.repository.ItemRepository;
+import com.devgym.gymmanager.orderitem.application.ItemService;
+import com.devgym.gymmanager.orderitem.domain.OrderItem;
+import com.devgym.gymmanager.orderitem.dto.request.CreateOrderItem;
+import com.devgym.gymmanager.orderitem.dto.response.OrderItemResponse;
+import com.devgym.gymmanager.orderitem.repository.ItemRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

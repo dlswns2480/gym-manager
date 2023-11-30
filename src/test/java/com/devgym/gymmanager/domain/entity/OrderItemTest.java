@@ -1,8 +1,8 @@
 package com.devgym.gymmanager.domain.entity;
 
-import com.devgym.gymmanager.domain.type.Category;
-import com.devgym.gymmanager.dto.request.CreateOrderItem;
-import org.assertj.core.api.Assertions;
+import com.devgym.gymmanager.orderitem.domain.Category;
+import com.devgym.gymmanager.orderitem.dto.request.CreateOrderItem;
+import com.devgym.gymmanager.orderitem.domain.OrderItem;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
