@@ -1,5 +1,6 @@
 package com.devgym.gymmanager.domain.entity;
 
+import com.devgym.gymmanager.auth.dto.SignUpRequest;
 import com.devgym.gymmanager.domain.type.Membership;
 import com.devgym.gymmanager.dto.request.MemberRequest;
 import org.assertj.core.api.Assertions;
@@ -15,8 +16,9 @@ class MemberTest {
         //given
         String name = "injun";
         String phoneNumber = "01034622480";
+        String passWord = "tomato2480*";
         Membership membership = Membership.HALF_YEAR;
-        MemberRequest memberRequest = new MemberRequest(name, phoneNumber, membership);
+        SignUpRequest memberRequest = new SignUpRequest(name, passWord, phoneNumber, membership);
         //when
         Member member = Member.createMember(memberRequest);
         //then
@@ -28,9 +30,10 @@ class MemberTest {
     void createMemberWithWrongNumber(){
         //given
         String name = "injun";
+        String passWord = "tomato2480*";
         String phoneNumber = "0034622480";
         Membership membership = Membership.HALF_YEAR;
-        MemberRequest memberRequest = new MemberRequest(name, phoneNumber, membership);
+        SignUpRequest memberRequest = new SignUpRequest(name, passWord, phoneNumber, membership);
         //when then
         assertThrows(IllegalStateException.class, () -> Member.createMember(memberRequest));
     }
