@@ -1,8 +1,9 @@
 package com.devgym.gymmanager.controller;
 
+import com.devgym.gymmanager.auth.dto.LoginRequest;
+import com.devgym.gymmanager.auth.dto.SignUpRequest;
 import com.devgym.gymmanager.domain.type.Membership;
 import com.devgym.gymmanager.dto.request.AddTrainer;
-import com.devgym.gymmanager.dto.request.MemberRequest;
 import com.devgym.gymmanager.dto.response.MemberResponse;
 import com.devgym.gymmanager.dto.response.TrainerResponse;
 import com.devgym.gymmanager.service.MemberService;
@@ -20,10 +21,15 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MemberController {
     private final MemberService service;
-    @Operation(summary = "회원 생성 요청", description = "회원 정보가 생성됩니다.", tags = { "MemberController" })
-    @PostMapping("/create")
-    public ResponseEntity<MemberResponse> create(@RequestBody MemberRequest request) {
-        return new ResponseEntity<>(service.createMember(request), HttpStatus.OK);
+    @Operation(summary = "회원가입 요청")
+    @PostMapping("/signup")
+    public ResponseEntity<MemberResponse> signUp(@RequestBody SignUpRequest request){
+        return ResponseEntity.ok(service.signUp(request));
+    }
+    @Operation(summary = "로그인 요청")
+    @PostMapping("/signin")
+    public ResponseEntity<String> signIn(@RequestBody LoginRequest request){
+        return ResponseEntity.ok(service.signIn(request));
     }
     @Operation(summary = "회원 조회 요청", description = "멤버십을 통해 회원 정보를 조회합니다.", tags = { "MemberController" })
     @GetMapping("/membership")
