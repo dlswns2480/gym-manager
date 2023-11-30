@@ -1,8 +1,8 @@
 package com.devgym.gymmanager.domain.entity;
 
+import com.devgym.gymmanager.auth.dto.SignUpRequest;
 import com.devgym.gymmanager.domain.BaseEntity;
 import com.devgym.gymmanager.domain.type.Membership;
-import com.devgym.gymmanager.dto.request.MemberRequest;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -22,6 +22,7 @@ public class Member extends BaseEntity {
     private Long id;
 
     private String name;
+    private String passWord;
     private String phoneNumber;
     @Enumerated(value = EnumType.STRING)
     private Membership membership;
@@ -36,20 +37,22 @@ public class Member extends BaseEntity {
     @OneToMany(mappedBy = "member", orphanRemoval = true)
     private List<Review> reviews = new ArrayList<>();
 
-    private Member(String name, String phoneNumber, Membership membership) {
+    private Member(String name, String passWord, String phoneNumber, Membership membership) {
         this.name = name;
+        this.passWord = passWord;
         this.phoneNumber = phoneNumber;
         this.membership = membership;
     }
 
-    public static Member createMember(MemberRequest memberRequest){
-        String name = memberRequest.name();
+    public static Member createMember(SignUpRequest memberRequest){
+        String name = memberRequest.memberName();
+        String passWord = memberRequest.passWord();
         String phoneNumber = memberRequest.phoneNumber();
         Membership membership = memberRequest.membership();
         if(!phoneNumber.startsWith("010")){
             throw new IllegalStateException("올바르지 않은 전화번호 형식입니다.");
         }
-        return new Member(name, phoneNumber, membership);
+        return new Member(name, passWord, phoneNumber, membership);
     }
 
     public void setTrainer(Trainer trainer){
