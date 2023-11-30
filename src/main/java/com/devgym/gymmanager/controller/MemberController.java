@@ -3,15 +3,18 @@ package com.devgym.gymmanager.controller;
 import com.devgym.gymmanager.auth.dto.LoginRequest;
 import com.devgym.gymmanager.auth.dto.SignUpRequest;
 import com.devgym.gymmanager.domain.type.Membership;
+import com.devgym.gymmanager.dto.SignUpValidator;
 import com.devgym.gymmanager.dto.request.AddTrainer;
 import com.devgym.gymmanager.dto.response.MemberResponse;
 import com.devgym.gymmanager.dto.response.TrainerResponse;
 import com.devgym.gymmanager.service.MemberService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,10 +23,15 @@ import java.util.List;
 @RequestMapping("/member")
 @RequiredArgsConstructor
 public class MemberController {
+    private final SignUpValidator signUpValidator;
     private final MemberService service;
+    @InitBinder("signUpRequest")
+    public void signupInitBinder(WebDataBinder webDataBinder) {
+        webDataBinder.addValidators(signUpValidator);
+    }
     @Operation(summary = "회원가입 요청")
     @PostMapping("/signup")
-    public ResponseEntity<MemberResponse> signUp(@RequestBody SignUpRequest request){
+    public ResponseEntity<MemberResponse> signUp(@Valid @RequestBody SignUpRequest request){
         return ResponseEntity.ok(service.signUp(request));
     }
     @Operation(summary = "로그인 요청")
