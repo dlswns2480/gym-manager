@@ -47,7 +47,7 @@ public class MemberService {
     public String signIn(LoginRequest request) {
         String name = request.memberName();
         Member member = memberRepository.findByName(name).orElseThrow(() -> new CustomException(ErrorCode.NOT_EXIST_MEMBER));
-        if(!member.getPassWord().equals(request.passWord())){
+        if(!encoder.matches(request.passWord(), member.getPassWord())){
             throw new CustomException(INVALID_PASSWORD);
         }
 
