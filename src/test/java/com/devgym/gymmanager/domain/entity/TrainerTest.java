@@ -1,7 +1,8 @@
 package com.devgym.gymmanager.domain.entity;
 
 import com.devgym.gymmanager.TestData.data.TrainerData;
-import com.devgym.gymmanager.dto.request.TrainerRequest;
+import com.devgym.gymmanager.trainer.domain.Trainer;
+import com.devgym.gymmanager.trainer.dto.request.TrainerRequest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

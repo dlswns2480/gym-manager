@@ -1,26 +1,23 @@
 package com.devgym.gymmanager.controller;
 
 import com.devgym.gymmanager.TestData.data.MemberData;
-import com.devgym.gymmanager.TestData.data.OrderData;
-import com.devgym.gymmanager.domain.entity.Member;
-import com.devgym.gymmanager.domain.type.Category;
-import com.devgym.gymmanager.dto.request.CreateOrderItem;
-import com.devgym.gymmanager.dto.request.OrderApiRequest;
-import com.devgym.gymmanager.dto.response.OrderResponse;
-import com.devgym.gymmanager.service.ItemService;
-import com.devgym.gymmanager.service.OrderService;
+import com.devgym.gymmanager.member.domain.Member;
+import com.devgym.gymmanager.orderitem.domain.Category;
+import com.devgym.gymmanager.orderitem.dto.request.CreateOrderItem;
+import com.devgym.gymmanager.order.dto.request.OrderApiRequest;
+import com.devgym.gymmanager.order.dto.response.OrderResponse;
+import com.devgym.gymmanager.orderitem.application.ItemService;
+import com.devgym.gymmanager.order.application.OrderService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 
-import java.util.Arrays;
 import java.util.Collections;
 
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 @DisplayName("[OrderController Test]")

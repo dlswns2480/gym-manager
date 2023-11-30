@@ -1,7 +1,7 @@
 package com.devgym.gymmanager.TestData.data;
 
-import com.devgym.gymmanager.domain.entity.Trainer;
-import com.devgym.gymmanager.dto.request.TrainerRequest;
+import com.devgym.gymmanager.trainer.domain.Trainer;
+import com.devgym.gymmanager.trainer.dto.request.TrainerRequest;
 
 public class TrainerData {
     public static TrainerRequest getTrainerRequest(){

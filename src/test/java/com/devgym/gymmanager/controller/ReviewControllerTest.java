@@ -1,10 +1,10 @@
 package com.devgym.gymmanager.controller;
 
 import com.devgym.gymmanager.TestData.data.MemberData;
-import com.devgym.gymmanager.domain.entity.Member;
-import com.devgym.gymmanager.dto.request.ReviewRequest;
-import com.devgym.gymmanager.dto.response.ReviewResponse;
-import com.devgym.gymmanager.service.ReviewService;
+import com.devgym.gymmanager.member.domain.Member;
+import com.devgym.gymmanager.review.dto.request.ReviewRequest;
+import com.devgym.gymmanager.review.dto.response.ReviewResponse;
+import com.devgym.gymmanager.review.application.ReviewService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

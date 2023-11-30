@@ -1,7 +1,7 @@
 package com.devgym.gymmanager.TestData.data;
 
-import com.devgym.gymmanager.domain.entity.Order;
-import com.devgym.gymmanager.dto.request.ApiCreateOrder;
+import com.devgym.gymmanager.order.domain.Order;
+import com.devgym.gymmanager.order.dto.request.ApiCreateOrder;
 
 import java.util.Collections;
 

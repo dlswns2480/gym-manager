@@ -1,9 +1,9 @@
 package com.devgym.gymmanager.controller;
 
 import com.devgym.gymmanager.TestData.data.TrainerData;
-import com.devgym.gymmanager.dto.request.TrainerRequest;
-import com.devgym.gymmanager.dto.response.TrainerResponse;
-import com.devgym.gymmanager.service.TrainerService;
+import com.devgym.gymmanager.trainer.dto.request.TrainerRequest;
+import com.devgym.gymmanager.trainer.dto.response.TrainerResponse;
+import com.devgym.gymmanager.trainer.application.TrainerService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

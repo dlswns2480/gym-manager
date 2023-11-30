@@ -1,9 +1,7 @@
 package com.devgym.gymmanager.TestData.data;
 
-import com.devgym.gymmanager.domain.entity.Member;
-import com.devgym.gymmanager.domain.entity.Review;
-import com.devgym.gymmanager.dto.request.ApiReviewRequest;
-import com.devgym.gymmanager.dto.request.ReviewRequest;
+import com.devgym.gymmanager.review.domain.Review;
+import com.devgym.gymmanager.review.dto.request.ApiReviewRequest;
 
 public class ReviewData {
     public static ApiReviewRequest getReviewRequest(){

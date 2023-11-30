@@ -1,14 +1,11 @@
 package com.devgym.gymmanager.domain.entity;
 
 import com.devgym.gymmanager.TestData.data.MemberData;
-import com.devgym.gymmanager.TestData.data.ReviewData;
-import com.devgym.gymmanager.dto.request.ApiReviewRequest;
-import com.devgym.gymmanager.dto.request.ReviewRequest;
+import com.devgym.gymmanager.review.domain.Review;
+import com.devgym.gymmanager.review.dto.request.ApiReviewRequest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class ReviewTest {
     @Test

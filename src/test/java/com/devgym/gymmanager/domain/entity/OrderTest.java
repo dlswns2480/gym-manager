@@ -1,7 +1,8 @@
 package com.devgym.gymmanager.domain.entity;
 
 import com.devgym.gymmanager.TestData.data.OrderData;
-import com.devgym.gymmanager.dto.request.ApiCreateOrder;
+import com.devgym.gymmanager.order.dto.request.ApiCreateOrder;
+import com.devgym.gymmanager.order.domain.Order;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
