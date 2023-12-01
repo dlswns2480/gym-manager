@@ -4,6 +4,7 @@ import com.devgym.gymmanager.member.dto.request.LoginRequest;
 import com.devgym.gymmanager.member.dto.request.SignUpRequest;
 import com.devgym.gymmanager.member.domain.Membership;
 import com.devgym.gymmanager.common.validator.SignUpValidator;
+import com.devgym.gymmanager.member.dto.response.TokenResponse;
 import com.devgym.gymmanager.trainer.dto.request.AddTrainer;
 import com.devgym.gymmanager.member.dto.response.MemberResponse;
 import com.devgym.gymmanager.trainer.dto.response.TrainerResponse;
@@ -36,7 +37,7 @@ public class MemberController {
     }
     @Operation(summary = "로그인 요청")
     @PostMapping("/signin")
-    public ResponseEntity<String> signIn(@RequestBody LoginRequest request){
+    public ResponseEntity<TokenResponse> signIn(@RequestBody LoginRequest request){
         return ResponseEntity.ok(service.signIn(request));
     }
     @Operation(summary = "회원 조회 요청", description = "멤버십을 통해 회원 정보를 조회합니다.", tags = { "MemberController" })

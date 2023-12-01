@@ -2,6 +2,7 @@ package com.devgym.gymmanager.member.application;
 
 import com.devgym.gymmanager.member.dto.request.LoginRequest;
 import com.devgym.gymmanager.member.dto.request.SignUpRequest;
+import com.devgym.gymmanager.member.dto.response.TokenResponse;
 import com.devgym.gymmanager.member.jwt.JwtUtil;
 import com.devgym.gymmanager.member.domain.Member;
 import com.devgym.gymmanager.trainer.domain.Trainer;
@@ -30,9 +31,12 @@ import static com.devgym.gymmanager.common.exception.ErrorCode.NOT_EXIST_MEMBER;
 @RequiredArgsConstructor
 public class MemberService {
     private final BCryptPasswordEncoder encoder;
-    @Value("${jwt.secret}")
+
+    @Value("${jwt.access-secret}")
     private String secretKey;
-    private Long expiredMs = 1000* 60 * 60L;
+    @Value("${jwt.refresh-secret}")
+    private String refreshSecretKey;
+
     private final MemberRepository memberRepository;
     private final TrainerService trainerService;
     @Transactional
@@ -45,14 +49,18 @@ public class MemberService {
         return new MemberResponse(savedMember.getName(), savedMember.getMembership());
     }
     @Transactional
-    public String signIn(LoginRequest request) {
+    public TokenResponse signIn(LoginRequest request) {
         String name = request.memberName();
         Member member = memberRepository.findByName(name).orElseThrow(() -> new CustomException(ErrorCode.NOT_EXIST_MEMBER));
         if(!encoder.matches(request.passWord(), member.getPassWord())){
             throw new CustomException(INVALID_PASSWORD);
         }
 
-        return JwtUtil.createJwt(request.memberName(), secretKey, expiredMs);
+        Long accessExpiredMs = 1000 * 60 * 60L;
+        Long refreshExpiredMs = 30 * 24 * 1000 * 60 * 60L;
+        String accessToken = JwtUtil.createAccessToken(request.memberName(), secretKey, accessExpiredMs);
+        String refreshToken = JwtUtil.createRefreshToekn(request.memberName(), refreshSecretKey, accessExpiredMs);
+        return new TokenResponse(accessToken, refreshToken);
     }
     @Transactional
     public TrainerResponse registerTrainer(AddTrainer request) {
