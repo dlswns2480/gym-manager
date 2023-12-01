@@ -9,6 +9,8 @@ import org.springframework.validation.Validator;
 
 import java.util.regex.Pattern;
 
+import static java.util.regex.Pattern.*;
+
 @Component
 @Slf4j
 public class SignUpValidator implements Validator {
@@ -20,20 +22,19 @@ public class SignUpValidator implements Validator {
 
     @Override
     public void validate(Object target, Errors errors) {
-        log.info("Validator에[ 들어옴");
+        log.info("Validator에 들어옴");
         ValidationUtils.rejectIfEmpty(errors, "memberName", "아이디는 필수입니다.");
         ValidationUtils.rejectIfEmpty(errors, "passWord", "비밀번호는 필수입니다.");
         ValidationUtils.rejectIfEmpty(errors, "membership", "멤버십 기입은 필수입니다.");
         SignUpRequest request = (SignUpRequest) target;
-        Pattern emailPattern = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$",
-                Pattern.CASE_INSENSITIVE);
-        Pattern phonePattern = Pattern.compile("^\\s*(?:\\+?(\\d{1,3}))?([-. (]*(\\d{3})[-. )]*)?((\\d{3})[-. ]*(\\d{2,4})(?:[-.x ]*(\\d+))?)\\s*$",
-                Pattern.CASE_INSENSITIVE);
+        Pattern emailPattern = compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", CASE_INSENSITIVE);
+        Pattern phonePattern = compile("^\\d{2,3}-\\d{3,4}-\\d{4}$", CASE_INSENSITIVE);
         if (!(emailPattern.matcher(request.memberName()).matches())) {
-            errors.rejectValue("memberName", "이메일 형식이 올바르지 않습니다.");
+            errors.rejectValue("memberName", "ERROR", "이메일 형식이 올바르지 않습니다.");
         }
-        if (!(phonePattern.matcher(request.memberName()).matches())) {
-            errors.rejectValue("phoneNumber", "전화번호 형식이 올바르지 않습니다.");
+        if (!(phonePattern.matcher(request.phoneNumber()).matches())) {
+            log.info(request.phoneNumber());
+            errors.rejectValue("phoneNumber", "ERROR","전화번호 형식이 올바르지 않습니다.");
         }
     }
 }
