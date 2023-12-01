@@ -17,8 +17,10 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class WebSecurityConfig {
-    @Value("${jwt.secret}")
+    @Value("${jwt.access-secret}")
     private String secretKey;
+    @Value("${jwt.refresh-secret}")
+    private String refreshSecretKey;
 
     @Bean
     public WebSecurityCustomizer configure() {
@@ -39,7 +41,7 @@ public class WebSecurityConfig {
                 .logout(AbstractHttpConfigurer::disable)
                 .rememberMe(AbstractHttpConfigurer::disable)
                 .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .addFilterBefore(new JwtFilter(secretKey), UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(new JwtFilter(secretKey, refreshSecretKey), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 }
