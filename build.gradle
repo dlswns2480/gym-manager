@@ -37,6 +37,11 @@ dependencies {
     implementation 'com.auth0:java-jwt:4.3.0'
     implementation 'io.jsonwebtoken:jjwt:0.9.1'
     implementation 'javax.xml.bind:jaxb-api:2.3.0'
+    //test contrainer
+    testImplementation "org.testcontainers:testcontainers:1.19.2"
+    testImplementation "org.testcontainers:junit-jupiter:1.19.2"
+    testImplementation "org.testcontainers:mysql:1.19.2"
+    testImplementation 'org.testcontainers:jdbc:1.18.3'
 }
 
 tasks.named('test') {
