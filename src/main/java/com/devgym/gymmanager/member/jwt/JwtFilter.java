@@ -26,6 +26,7 @@ public class JwtFilter extends OncePerRequestFilter {
     private final String refreshSecretKey;
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        String ROLE = "";
         String authorization = request.getHeader(HttpHeaders.AUTHORIZATION);
         String type = request.getHeader("Token-Type");
         if(authorization == null){
@@ -59,8 +60,13 @@ public class JwtFilter extends OncePerRequestFilter {
             }
             memberName = JwtUtil.getMemberName(token, refreshSecretKey);
         }
-
-        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(memberName, null, List.of(new SimpleGrantedAuthority("USER")));
+        if(memberName.contains("tr_")){
+            ROLE = "TRAINER";
+        }
+        else{
+            ROLE = "USER";
+        }
+        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(memberName, null, List.of(new SimpleGrantedAuthority(ROLE)));
 
         authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
         SecurityContextHolder.getContext().setAuthentication(authentication); //이제 이 authentication에 접근하여 name값 접근 가능
