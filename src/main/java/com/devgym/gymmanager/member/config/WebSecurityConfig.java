@@ -17,6 +17,20 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class WebSecurityConfig {
+    private static final String[] PERMIT_URL_ARRAY = {
+            /* swagger v2 */
+            "/v2/api-docs",
+            "/swagger-resources",
+            "/swagger-resources/**",
+            "/configuration/ui",
+            "/configuration/security",
+            "/swagger-ui.html",
+            "/webjars/**",
+            /* swagger v3 */
+            "/v3/api-docs/**",
+            "/swagger-ui/**",
+            "/member/signin", "/member/signup"
+    };
     @Value("${jwt.access-secret}")
     private String secretKey;
     @Value("${jwt.refresh-secret}")
@@ -24,7 +38,7 @@ public class WebSecurityConfig {
 
     @Bean
     public WebSecurityCustomizer configure() {
-        return (web) -> web.ignoring().requestMatchers("/assets/**", "/swagger-ui/**");
+        return (web) -> web.ignoring().requestMatchers("/assets/**");
     }
 
     @Bean
@@ -32,7 +46,7 @@ public class WebSecurityConfig {
 
 
         http.authorizeRequests((authz) -> authz
-                        .requestMatchers("/member/signin", "/member/signup", "/swagger-ui/index.html#/").permitAll()
+                        .requestMatchers(PERMIT_URL_ARRAY).permitAll()
                         .anyRequest().authenticated())
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .csrf(AbstractHttpConfigurer::disable)
