@@ -30,12 +30,10 @@ public class JwtFilter extends OncePerRequestFilter {
         String authorization = request.getHeader(HttpHeaders.AUTHORIZATION);
         String type = request.getHeader("Token-Type");
         if(authorization == null){
-            log.info(NOT_EXIST_TOKEN.getMessage());
             filterChain.doFilter(request, response);
             return;
         }
         if (!authorization.startsWith("Bearer")){
-            log.info(NOT_BEARER_TOKEN.getMessage());
             filterChain.doFilter(request, response);
             return;
         }
@@ -43,7 +41,6 @@ public class JwtFilter extends OncePerRequestFilter {
 
         String memberName = "";
         if(type.equals("access")){
-            log.info("In ACCESS");
             if(JwtUtil.isExpired(token, secretKey)){ //토큰이 만료된 경우,
                 log.info(EXPIRED_TOKEN.getMessage());
                 filterChain.doFilter(request, response);
@@ -52,7 +49,6 @@ public class JwtFilter extends OncePerRequestFilter {
             memberName = JwtUtil.getMemberName(token, secretKey);
         }
         else if(type.equals("refresh")){
-            log.info("In REFRESH");
             if(JwtUtil.isExpired(token, refreshSecretKey)){ //토큰이 만료된 경우,
                 log.info(EXPIRED_TOKEN.getMessage());
                 filterChain.doFilter(request, response);
