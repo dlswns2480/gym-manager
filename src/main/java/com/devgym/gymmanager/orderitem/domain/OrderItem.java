@@ -1,6 +1,7 @@
 package com.devgym.gymmanager.orderitem.domain;
 
 import com.devgym.gymmanager.common.BaseEntity;
+import com.devgym.gymmanager.item.domain.Item;
 import com.devgym.gymmanager.orderitem.dto.request.CreateOrderItem;
 import com.devgym.gymmanager.order.domain.Order;
 import jakarta.persistence.*;
@@ -10,6 +11,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.Objects;
+
+import static jakarta.persistence.FetchType.*;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -23,9 +26,12 @@ public class OrderItem extends BaseEntity {
     private int price;
     private int quantity;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "order_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private Order order;
+    @ManyToOne(fetch = LAZY)
+    @JoinColumn(name = "item_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+    private Item item;
 
     @Builder(access = AccessLevel.PRIVATE)
     private OrderItem(CreateOrderItem orderItem){
