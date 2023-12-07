@@ -1,7 +1,7 @@
 package com.devgym.gymmanager.service;
 
 import com.devgym.gymmanager.TestData.data.ItemData;
-import com.devgym.gymmanager.orderitem.application.ItemService;
+import com.devgym.gymmanager.orderitem.application.OrderItemService;
 import com.devgym.gymmanager.orderitem.domain.OrderItem;
 import com.devgym.gymmanager.orderitem.dto.request.CreateOrderItem;
 import com.devgym.gymmanager.orderitem.dto.response.OrderItemResponse;
@@ -22,11 +22,11 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class ItemServiceTest {
+class OrderItemServiceTest {
     @Mock
     ItemRepository itemRepository;
     @InjectMocks
-    ItemService itemService;
+    OrderItemService orderItemService;
 
     @Test
     @DisplayName("아이템 생성에 성공해야한다")
@@ -35,7 +35,7 @@ class ItemServiceTest {
         OrderItem item = ItemData.getItem();
         when(itemRepository.save(any(OrderItem.class))).thenReturn(item);
 
-        Long itemId = itemService.createItem(itemDto);
+        Long itemId = orderItemService.createOrderItem(itemDto);
 
         assertThat(item.getId()).isEqualTo(itemId);
     }
@@ -45,7 +45,7 @@ class ItemServiceTest {
     void createWithWrongPrice() {
         CreateOrderItem request = ItemData.getItemDtoWithZeroPrice();
 
-        assertThrows(IllegalArgumentException.class, () -> itemService.createItem(request));
+        assertThrows(IllegalArgumentException.class, () -> orderItemService.createOrderItem(request));
     }
 
     @Test
@@ -55,7 +55,7 @@ class ItemServiceTest {
         items.add(ItemData.getItem());
         when(itemRepository.findAll()).thenReturn(items);
 
-        List<OrderItemResponse> all = itemService.findAll();
+        List<OrderItemResponse> all = orderItemService.findAll();
 
         assertAll(
                 () -> assertThat(items.get(0).getPrice()).isEqualTo(all.get(0).price()),

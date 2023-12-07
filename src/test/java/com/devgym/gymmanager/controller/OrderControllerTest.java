@@ -7,7 +7,7 @@ import com.devgym.gymmanager.orderitem.domain.Category;
 import com.devgym.gymmanager.orderitem.dto.request.CreateOrderItem;
 import com.devgym.gymmanager.order.dto.request.OrderApiRequest;
 import com.devgym.gymmanager.order.dto.response.OrderResponse;
-import com.devgym.gymmanager.orderitem.application.ItemService;
+import com.devgym.gymmanager.orderitem.application.OrderItemService;
 import com.devgym.gymmanager.order.application.OrderService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -30,7 +30,7 @@ class OrderControllerTest extends BaseIntegrationTest {
     @Autowired
     OrderService orderService;
     @Autowired
-    ItemService itemService;
+    OrderItemService orderItemService;
     @Value("${jwt.access-secret}")
     private String accessSecret;
     private final HttpHeaders httpHeaders = new HttpHeaders();
@@ -49,7 +49,7 @@ class OrderControllerTest extends BaseIntegrationTest {
         Member member = MemberData.getMember();
         Member save = memberRepository.save(member);
         CreateOrderItem itemA = new CreateOrderItem("itemA", Category.PROTEIN, 4000, 3);
-        Long itemId = itemService.createItem(itemA);
+        Long itemId = orderItemService.createOrderItem(itemA);
         OrderApiRequest orderApiRequest = new OrderApiRequest(member.getId(), Collections.singletonList(itemId));
 
         mvc.perform(post("/order/create")
@@ -66,7 +66,7 @@ class OrderControllerTest extends BaseIntegrationTest {
         Member member = MemberData.getMember();
         Member save = memberRepository.save(member);
         CreateOrderItem itemA = new CreateOrderItem("itemA", Category.PROTEIN, 4000, 3);
-        Long itemId = itemService.createItem(itemA);
+        Long itemId = orderItemService.createOrderItem(itemA);
         OrderApiRequest orderApiRequest = new OrderApiRequest(member.getId(), Collections.singletonList(itemId));
         OrderResponse order = orderService.createOrder(orderApiRequest);
 

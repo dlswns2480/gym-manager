@@ -7,7 +7,7 @@ import com.devgym.gymmanager.member.application.MemberService;
 import com.devgym.gymmanager.member.domain.Member;
 import com.devgym.gymmanager.order.application.OrderService;
 import com.devgym.gymmanager.order.domain.Order;
-import com.devgym.gymmanager.orderitem.application.ItemService;
+import com.devgym.gymmanager.orderitem.application.OrderItemService;
 import com.devgym.gymmanager.orderitem.domain.OrderItem;
 import com.devgym.gymmanager.order.dto.request.OrderApiRequest;
 import com.devgym.gymmanager.order.dto.response.OrderResponse;
@@ -36,7 +36,7 @@ class OrderServiceTest {
     @Mock
     MemberService memberService;
     @Mock
-    ItemService itemService;
+    OrderItemService orderItemService;
     @InjectMocks
     OrderService orderService;
 
@@ -50,7 +50,7 @@ class OrderServiceTest {
         ReflectionTestUtils.setField(member, "id", 1L);
         order.setMember(member);
 
-        when(itemService.findByIdService(any(Long.class))).thenReturn(item);
+        when(orderItemService.findByIdService(any(Long.class))).thenReturn(item);
         when(memberService.findByIdService(any(Long.class))).thenReturn(member);
         when(orderRepository.save(any(Order.class))).thenReturn(order);
 

@@ -9,7 +9,7 @@ import com.devgym.gymmanager.order.dto.request.ApiCreateOrder;
 import com.devgym.gymmanager.order.dto.request.OrderApiRequest;
 import com.devgym.gymmanager.order.dto.response.OrderResponse;
 import com.devgym.gymmanager.order.repository.OrderRepository;
-import com.devgym.gymmanager.orderitem.application.ItemService;
+import com.devgym.gymmanager.orderitem.application.OrderItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,12 +23,12 @@ import java.util.List;
 public class OrderService {
     private final OrderRepository orderRepository;
     private final MemberService memberService;
-    private final ItemService itemService;
+    private final OrderItemService orderItemService;
     @Transactional
     public OrderResponse createOrder(OrderApiRequest request) {
         List<OrderItem> items = new ArrayList<>();
         for(Long id : request.itemIds()){
-            items.add(itemService.findByIdService(id));
+            items.add(orderItemService.findByIdService(id));
         }
         Member member = memberService.findByIdService(request.memberId());
         ApiCreateOrder apiCreateOrder = new ApiCreateOrder(member, items);

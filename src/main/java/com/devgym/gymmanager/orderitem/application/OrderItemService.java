@@ -17,10 +17,10 @@ import static com.devgym.gymmanager.common.exception.ErrorCode.*;
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
-public class ItemService {
+public class OrderItemService {
     private final ItemRepository itemRepository;
     @Transactional
-    public Long createItem(CreateOrderItem orderItem){
+    public Long createOrderItem(CreateOrderItem orderItem){
         OrderItem item = OrderItem.createItem(orderItem);
         OrderItem save = itemRepository.save(item);
         return save.getId();
