@@ -2,7 +2,7 @@ package com.devgym.gymmanager.order.domain;
 
 import com.devgym.gymmanager.common.BaseEntity;
 import com.devgym.gymmanager.orderitem.domain.OrderItem;
-import com.devgym.gymmanager.order.dto.request.ApiCreateOrder;
+import com.devgym.gymmanager.order.dto.request.CreateOrderRequest;
 import com.devgym.gymmanager.member.domain.Member;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -34,7 +34,7 @@ public class Order extends BaseEntity {
     private Member member;
 
     @Builder(access = AccessLevel.PRIVATE)
-    private Order(ApiCreateOrder request) {
+    private Order(CreateOrderRequest request) {
         for (OrderItem orderItem : request.orderItems()) {
             this.finalPrice += orderItem.getPrice() * orderItem.getQuantity();
             this.orderItems.add(orderItem);
@@ -47,7 +47,7 @@ public class Order extends BaseEntity {
     }
 
 
-    public static Order createOrder(ApiCreateOrder request) {
+    public static Order createOrder(CreateOrderRequest request) {
         if(request.orderItems().size() > 5){
             throw new IllegalStateException("한번에 5개까지만 주문 가능합니다");
         }

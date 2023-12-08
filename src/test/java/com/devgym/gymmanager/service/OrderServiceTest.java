@@ -9,7 +9,7 @@ import com.devgym.gymmanager.order.application.OrderService;
 import com.devgym.gymmanager.order.domain.Order;
 import com.devgym.gymmanager.orderitem.application.OrderItemService;
 import com.devgym.gymmanager.orderitem.domain.OrderItem;
-import com.devgym.gymmanager.order.dto.request.OrderApiRequest;
+import com.devgym.gymmanager.order.dto.request.CreateOrderApiRequest;
 import com.devgym.gymmanager.order.dto.response.OrderResponse;
 import com.devgym.gymmanager.order.repository.OrderRepository;
 import org.junit.jupiter.api.DisplayName;
@@ -54,7 +54,7 @@ class OrderServiceTest {
         when(memberService.findByIdService(any(Long.class))).thenReturn(member);
         when(orderRepository.save(any(Order.class))).thenReturn(order);
 
-        OrderResponse order1 = orderService.createOrder(new OrderApiRequest(member.getId(), Collections.singletonList(item.getId())));
+        OrderResponse order1 = orderService.createOrder(new CreateOrderApiRequest(member.getId(), Collections.singletonList(item.getId())));
 
         assertThat(order.getFinalPrice()).isEqualTo(order1.finalPrice());
     }

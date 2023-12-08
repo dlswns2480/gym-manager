@@ -5,5 +5,5 @@ import com.devgym.gymmanager.orderitem.domain.OrderItem;
 
 import java.util.List;
 
-public record ApiCreateOrder(Member member, List<OrderItem> orderItems) {
+public record CreateOrderRequest(Member member, List<OrderItem> orderItems) {
 }

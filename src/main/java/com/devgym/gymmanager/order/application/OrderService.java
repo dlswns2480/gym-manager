@@ -5,8 +5,8 @@ import com.devgym.gymmanager.member.domain.Member;
 import com.devgym.gymmanager.order.domain.Order;
 import com.devgym.gymmanager.orderitem.domain.OrderItem;
 import com.devgym.gymmanager.order.dto.mapper.OrderResponseMapper;
-import com.devgym.gymmanager.order.dto.request.ApiCreateOrder;
-import com.devgym.gymmanager.order.dto.request.OrderApiRequest;
+import com.devgym.gymmanager.order.dto.request.CreateOrderRequest;
+import com.devgym.gymmanager.order.dto.request.CreateOrderApiRequest;
 import com.devgym.gymmanager.order.dto.response.OrderResponse;
 import com.devgym.gymmanager.order.repository.OrderRepository;
 import com.devgym.gymmanager.orderitem.application.OrderItemService;
@@ -25,14 +25,14 @@ public class OrderService {
     private final MemberService memberService;
     private final OrderItemService orderItemService;
     @Transactional
-    public OrderResponse createOrder(OrderApiRequest request) {
+    public OrderResponse createOrder(CreateOrderApiRequest request) {
         List<OrderItem> items = new ArrayList<>();
         for(Long id : request.itemIds()){
             items.add(orderItemService.findByIdService(id));
         }
         Member member = memberService.findByIdService(request.memberId());
-        ApiCreateOrder apiCreateOrder = new ApiCreateOrder(member, items);
-        Order order = Order.createOrder(apiCreateOrder); //생성 시 회원 set까지 한번에
+        CreateOrderRequest createOrderRequest = new CreateOrderRequest(member, items);
+        Order order = Order.createOrder(createOrderRequest); //생성 시 회원 set까지 한번에
         Order save = orderRepository.save(order);
 
         return OrderResponseMapper.toOrderResponse(save);

@@ -5,7 +5,7 @@ import com.devgym.gymmanager.member.domain.Member;
 import com.devgym.gymmanager.member.jwt.JwtUtil;
 import com.devgym.gymmanager.orderitem.domain.Category;
 import com.devgym.gymmanager.orderitem.dto.request.CreateOrderItem;
-import com.devgym.gymmanager.order.dto.request.OrderApiRequest;
+import com.devgym.gymmanager.order.dto.request.CreateOrderApiRequest;
 import com.devgym.gymmanager.order.dto.response.OrderResponse;
 import com.devgym.gymmanager.orderitem.application.OrderItemService;
 import com.devgym.gymmanager.order.application.OrderService;
@@ -50,12 +50,12 @@ class OrderControllerTest extends BaseIntegrationTest {
         Member save = memberRepository.save(member);
         CreateOrderItem itemA = new CreateOrderItem("itemA", Category.PROTEIN, 4000, 3);
         Long itemId = orderItemService.createOrderItem(itemA);
-        OrderApiRequest orderApiRequest = new OrderApiRequest(member.getId(), Collections.singletonList(itemId));
+        CreateOrderApiRequest createOrderApiRequest = new CreateOrderApiRequest(member.getId(), Collections.singletonList(itemId));
 
         mvc.perform(post("/order/create")
                 .contentType(MediaType.APPLICATION_JSON)
                         .headers(httpHeaders)
-                .content(asJsonString(orderApiRequest)))
+                .content(asJsonString(createOrderApiRequest)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.memberName").value(save.getName()))
                 .andExpect(jsonPath("$.finalPrice").value(itemA.price() * itemA.quantity()));
@@ -67,8 +67,8 @@ class OrderControllerTest extends BaseIntegrationTest {
         Member save = memberRepository.save(member);
         CreateOrderItem itemA = new CreateOrderItem("itemA", Category.PROTEIN, 4000, 3);
         Long itemId = orderItemService.createOrderItem(itemA);
-        OrderApiRequest orderApiRequest = new OrderApiRequest(member.getId(), Collections.singletonList(itemId));
-        OrderResponse order = orderService.createOrder(orderApiRequest);
+        CreateOrderApiRequest createOrderApiRequest = new CreateOrderApiRequest(member.getId(), Collections.singletonList(itemId));
+        OrderResponse order = orderService.createOrder(createOrderApiRequest);
 
         mvc.perform(get("/order")
                         .headers(httpHeaders)

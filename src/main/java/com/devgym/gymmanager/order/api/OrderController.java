@@ -1,6 +1,6 @@
 package com.devgym.gymmanager.order.api;
 
-import com.devgym.gymmanager.order.dto.request.OrderApiRequest;
+import com.devgym.gymmanager.order.dto.request.CreateOrderApiRequest;
 import com.devgym.gymmanager.order.dto.response.OrderResponse;
 import com.devgym.gymmanager.order.application.OrderService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -19,7 +19,7 @@ public class OrderController {
     private final OrderService orderService;
     @Operation(summary = "주문 생성 요청", description = "주문 정보가 생성됩니다.", tags = { "OrderController" })
     @PostMapping("/create")
-    public ResponseEntity<OrderResponse> createOrder(@RequestBody OrderApiRequest order){
+    public ResponseEntity<OrderResponse> createOrder(@RequestBody CreateOrderApiRequest order){
         return new ResponseEntity<>(orderService.createOrder(order), HttpStatus.OK);
     }
     @Operation(summary = "주문 조회 요청", description = "전체 주문 정보를 조회합니다.", tags = { "OrderController" })
