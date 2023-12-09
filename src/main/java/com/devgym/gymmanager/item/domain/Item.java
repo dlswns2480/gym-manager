@@ -23,11 +23,14 @@ public class Item {
     private String itemName;
     @Column(name = "item_price")
     private int price;
+    @Column(name = "item_stock")
+    private int stock;
 
-    public Item(Category category, String itemName, int price) {
+    public Item(Category category, String itemName, int price, int stock) {
         this.category = category;
         this.itemName = itemName;
         this.price = price;
+        this.stock = stock;
     }
 
     @Override
