@@ -6,10 +6,11 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 import java.util.Optional;
+import org.springframework.data.repository.query.Param;
 
 public interface TrainerRepository extends JpaRepository<Trainer, Long> {
     @Query("select t from Trainer t where t.career >= :career")
-    List<Trainer> findAllByCareerGreaterThanEqual(int career);
+    List<Trainer> findAllByCareerGreaterThanEqual(@Param("career") int career);
 
     Optional<Trainer> findByPhoneNumber(String phoneNumber);
 }
