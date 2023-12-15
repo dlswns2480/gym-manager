@@ -17,7 +17,7 @@ import static org.assertj.core.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
-class TrainerRepositoryTest extends TestContainerSupport {
+class TrainerRepositoryTest{
     private final TrainerRepository trainerRepository;
 
     @Autowired
