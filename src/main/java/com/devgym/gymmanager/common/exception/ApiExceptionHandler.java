@@ -16,9 +16,10 @@ public class ApiExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ResponseEntity<ErrorResponse> handleMethodArgumentNotValidException(MethodArgumentNotValidException e){
+    public ResponseEntity<ErrorResponse> handleMethodArgumentNotValidException(
+        MethodArgumentNotValidException e) {
         log.error(e.getMessage());
-        log.error("{}",e.getBindingResult().getFieldErrors());
+        log.error("{}", e.getBindingResult().getFieldErrors());
         StringBuilder sb = new StringBuilder();
         for (FieldError ex : e.getBindingResult().getFieldErrors()) {
             sb.append(ex.getCode());
@@ -26,8 +27,9 @@ public class ApiExceptionHandler {
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorResponse(sb.toString()));
     }
+
     @ExceptionHandler(CommonException.class)
-    public ResponseEntity<ErrorResponse> errorHandler(CommonException e){
+    public ResponseEntity<ErrorResponse> errorHandler(CommonException e) {
         log.error(e.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse(e.getMessage()));
     }
