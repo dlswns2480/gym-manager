@@ -1,9 +1,11 @@
 package com.devgym.gymmanager.repository;
 
-import com.devgym.gymmanager.common.TestContainerSupport;
+import static org.assertj.core.api.Assertions.assertThat;
+
 import com.devgym.gymmanager.trainer.domain.Trainer;
 import com.devgym.gymmanager.trainer.dto.request.TrainerRequest;
 import com.devgym.gymmanager.trainer.repository.TrainerRepository;
+import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,13 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.*;
-
 @SpringBootTest
 @Transactional
-class TrainerRepositoryTest extends TestContainerSupport {
+class TrainerRepositoryTest{
     private final TrainerRepository trainerRepository;
 
     @Autowired

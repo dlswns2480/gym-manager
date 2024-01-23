@@ -1,6 +1,5 @@
 package com.devgym.gymmanager.controller;
 
-import com.devgym.gymmanager.common.TestContainerSupport;
 import com.devgym.gymmanager.member.repository.MemberRepository;
 import com.devgym.gymmanager.trainer.repository.TrainerRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -14,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 @AutoConfigureMockMvc
 @SpringBootTest
 @Transactional
-public class BaseIntegrationTest extends TestContainerSupport{
+public class BaseIntegrationTest{
     @Autowired
     protected MockMvc mvc;
     @Autowired
