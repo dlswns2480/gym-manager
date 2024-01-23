@@ -1,19 +1,22 @@
 package com.devgym.gymmanager.item.domain;
 
-import com.devgym.gymmanager.orderitem.domain.Category;
-import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-
-import java.util.Objects;
-
 import static jakarta.persistence.GenerationType.IDENTITY;
 import static lombok.AccessLevel.PROTECTED;
+
+import com.devgym.gymmanager.orderitem.domain.Category;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import java.util.Objects;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @NoArgsConstructor(access = PROTECTED)
 @Getter
 public class Item {
+
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
@@ -35,10 +38,15 @@ public class Item {
 
     @Override
     public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
+        if (this == object) {
+            return true;
+        }
+        if (object == null || getClass() != object.getClass()) {
+            return false;
+        }
         Item item = (Item) object;
-        return price == item.price && category == item.category && Objects.equals(itemName, item.itemName);
+        return price == item.price && category == item.category && Objects.equals(itemName,
+            item.itemName);
     }
 
     @Override

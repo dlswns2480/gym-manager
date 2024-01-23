@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class})
 public class ReplicationDataSourceConfig {
+
     private final DataSourceKey dataSourceKey;
 
     @Bean
@@ -39,7 +40,8 @@ public class ReplicationDataSourceConfig {
 
     @Bean
     public DataSource routingDataSource(DataSource masterDataSource, DataSource slaveDataSource) {
-        ReplicationRoutingDataSource routingDataSource = new ReplicationRoutingDataSource(dataSourceKey);
+        ReplicationRoutingDataSource routingDataSource = new ReplicationRoutingDataSource(
+            dataSourceKey);
 
         Map<Object, Object> sources = Map.of(
             dataSourceKey.getMasterKey(), masterDataSource,
@@ -55,6 +57,7 @@ public class ReplicationDataSourceConfig {
     @Bean
     @Primary
     public DataSource dataSource() {
-        return new LazyConnectionDataSourceProxy(routingDataSource(masterDataSource(), slaveDataSource()));
+        return new LazyConnectionDataSourceProxy(
+            routingDataSource(masterDataSource(), slaveDataSource()));
     }
 }

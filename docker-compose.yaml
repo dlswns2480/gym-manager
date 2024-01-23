@@ -9,7 +9,7 @@ services:
       MYSQL_DATABASE: gym
       MYSQL_ROOT_HOST: '%'
 #      MYSQL_ALLOW_EMPTY_PASSWORD : true
-      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_ROOT_PASSWORD: 12345678
       TZ: 'Asia/Seoul'
     ports:
       - "3308:3306"

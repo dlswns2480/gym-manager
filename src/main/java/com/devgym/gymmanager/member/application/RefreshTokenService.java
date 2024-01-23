@@ -15,19 +15,23 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 @Slf4j
 public class RefreshTokenService {
+
     private final MemberRepository memberRepository;
     @Value("${jwt.access-secret}")
     private String secretKey;
     @Value("${jwt.refresh-secret}")
     private String refreshSecretKey;
-    public TokenResponse reGetToken(String memberName){
+
+    public TokenResponse reGetToken(String memberName) {
         log.info("member's name : {}", memberName);
-        Member member = memberRepository.findByName(memberName).orElseThrow(() -> new CustomException(ErrorCode.NOT_EXIST_MEMBER));
+        Member member = memberRepository.findByName(memberName)
+            .orElseThrow(() -> new CustomException(ErrorCode.NOT_EXIST_MEMBER));
 
         Long accessExpiredMs = 1000 * 60 * 60L;
         Long refreshExpiredMs = 30 * 24 * 1000 * 60 * 60L;
         String accessToken = JwtUtil.createAccessToken(memberName, secretKey, accessExpiredMs);
-        String refreshToken = JwtUtil.createRefreshToekn(memberName, refreshSecretKey, refreshExpiredMs);
+        String refreshToken = JwtUtil.createRefreshToekn(memberName, refreshSecretKey,
+            refreshExpiredMs);
         return new TokenResponse(accessToken, refreshToken);
     }
 }
