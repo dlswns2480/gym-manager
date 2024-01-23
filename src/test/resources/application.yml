@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    url: jdbc:tc:mysql:8:///
+    driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: true
+        default_batch_fetch_size: 10
+logging.level:
+  org.hibernate.SQL: debug
+  org.hibernate.orm.jdbc.bind: trace
+jwt:
+  access-secret: "Vwgff4uvzQ4pes0Zt7sDNtL6pxGIkg2k95ZIrVhvlGmxcDRq9O1fnLN2lEzItsNE4w_lQ3f7xd09ukYxzIYS6InrYfg4ed2BSP0wmZ2RJEswzDsCLNqwRRXW780o1TYbuQpiXuUN0TnwXzb2l4YnNcXLHyBBJoIU17y1H56Aq1-ABW6MREvcFvlW-oUcMw92R0piQK4hO_Xo8AFIDnbeAqQUQ2Q91iQZRTtiNrV9Gv_pF_f1LF9OLDnvmTTy7Av7yFRstie90G9ABYsFTrxywHLzA-QMDYOeUOk8wq6TfxKbULK8PqWR__s1ebFlA3bFO1shhUdffA"
+  refresh-secret: "p0K9Lu7R5rMJhBvZ8OgDwFjXoQ1SnVtYiL6yRcZg0pEfUc2IyO7uQdGfKvNzRjKbVp9L3iIqU3jXoW4jL9oFhFfK3rJgR5pCzVtXyQ1mP9sK2lXoQyTnYvU5jUvR8oN1lW6pNzUzP3iX5iBvW2iGgG2jL9oFvUzPvS4jL1oM7rP9oM6pJ4iM7rX8oJ5yX5iN8oJ7rM9oL7rM9oK1rP2iM7rX8oN9oF3rY8oN9oF1rM9oL5rP8oM4rX8oK7rX8oJ6rP8oN8oF4rM9oK3rX8oK3rX8oN4rP8oL6rX8oJ4rX8oN7rX8oJ1rM9oK5rP8oN5rX8oN8oF1rN9oL4rP8oM6rX8oJ6rX8oK6rM9oK3rP8oK9rM9oF"
